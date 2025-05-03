@@ -6,14 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    p {
+        color: #666;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
 
 <body>
+    <a href='HomePage.html'>
+        <button>
+            Back
+        </button>
+    </a>
     <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    require_once __DIR__ . '/../connection.php';
+
     function showDetailGame($gameID)
     {
-        require_once __DIR__ . '/../connection.php';
+        global $conn;
 
-        $query = "SELECT * FROM game WHERE game_id = '" . $gameID . "'";
+        $query = "SELECT * FROM game WHERE game_id = '" . $gameID . "'";    
         $result = mysqli_query($conn, $query);
         $found = false;
 
@@ -28,7 +67,17 @@
                 echo "<p>Price: " . $row['game_price'] . "</p>";
                 echo "<p>Supported OS :" . $row['game_supported_os'] . "</p>";
                 echo "<p>Game type : $row[game_type]</p>";
-                
+                //if user have a session
+                if (isset($_SESSION['user_id'])) {
+                    if (getPurchasedStatus($conn, $gameID, $_SESSION['user_id'])) {
+                        echo "<a href=''><button>Play Game</button></a>";
+                    } else {
+                        echo "<p>Status : <b>BUY GAME</b></p>";
+                        echo "<form method='post' action='purchaseGame.php'>";
+                        echo "<input type='submit' name='purchase' value='BUY GAME' style='width:100px;'>";
+                        echo "</form>";
+                    } 
+                }
                 $found = true;
                 break;
             }
@@ -38,7 +87,20 @@
         }
     }
 
+    function getPurchasedStatus($conn, $gameID, $userID)
+    {
+
+        $queryLibrary = "SELECT * FROM library WHERE game_id = '" . $gameID . "' AND user_id = '" . $userID . "'";
+        $resultLibrary = mysqli_query($conn, $queryLibrary);
+        while ($row = mysqli_fetch_assoc($resultLibrary)) {
+            if ($row['game_id'] == $gameID && $row['user_id'] == $userID) {
+                return true;
+            }
+        }
+        return false;
+    }
     ?>
+
 </body>
 
 </html>
