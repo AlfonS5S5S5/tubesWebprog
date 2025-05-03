@@ -78,6 +78,9 @@
                         echo "</form>";
                     } 
                 }
+                else {
+                    echo "login";
+                }
                 $found = true;
                 break;
             }
