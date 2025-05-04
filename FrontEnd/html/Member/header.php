@@ -145,8 +145,8 @@
 
 <?php
     if (isset($_SESSION['user_id'])) {
-        require_once "../../../BackEnd/connection.php";
-        require_once "../../../BackEnd/getData.php";
+        require_once __DIR__ . "/../../../BackEnd/connection.php";
+        require_once __DIR__ . "/../../../BackEnd/getData.php";
     
         updateUserSession($conn, $_SESSION['user_id']);
     }
