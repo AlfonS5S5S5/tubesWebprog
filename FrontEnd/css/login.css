@@ -1,15 +1,16 @@
 body {
-    /* background-image: url('../../Assets/Background/steamLoginBG.jpg');
+    background-image: url('../../Assets/Background/steamLoginBG.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center; */
-    background-color: #171a21;
+    background-position: center center;
+    /* background-color: #171a21; */
     font-family: Arial, sans-serif;
-    /* height: 100vh;
-    margin: 0; */
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 header{
-    background-color: white;
+    background-color: #1b2838;
     padding: 10px;
     margin : 10px 50px;
     height: 50px;
@@ -17,7 +18,8 @@ header{
     text-align: center;
 }
 .login {
-    background-color: white;
+    background-color: #1b2838;
+    color: white;
     margin: 0;
     padding: 20px;
     border-radius: 5px;
