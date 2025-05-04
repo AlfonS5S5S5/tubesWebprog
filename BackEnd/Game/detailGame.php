@@ -6,34 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 20px;
-    }
-
-    h1 {
-        color: #333;
-    }
-
-    p {
-        color: #666;
-    }
-
-    button {
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-</style>
 
 <body>
     <a href='HomePage.html'>
@@ -47,7 +19,10 @@
     }
 
     require_once __DIR__ . '/../connection.php';
-
+    if(isset($_POST['submit_detail'])){
+        $gameID = $_POST['game_id'];
+        showDetailGame($gameID);
+    } 
     function showDetailGame($gameID)
     {
         global $conn;
