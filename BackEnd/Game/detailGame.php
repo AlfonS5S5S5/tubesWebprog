@@ -47,13 +47,14 @@
                         echo "<a href=''><button>Play Game</button></a>";
                     } else {
                         echo "<p>Status : <b>BUY GAME</b></p>";
-                        echo "<form method='post' action='purchaseGame.php'>";
+                        echo "<form method='post' action='../../FrontEnd/html/Game/BuyGames.php'>";
+                        echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
                         echo "<input type='submit' name='purchase' value='BUY GAME' style='width:100px;'>";
                         echo "</form>";
                     } 
                 }
                 else {
-                    echo "login";
+                    echo "<a href='../../../FrontEnd/html/Member/Login.html></a>";
                 }
                 $found = true;
                 break;

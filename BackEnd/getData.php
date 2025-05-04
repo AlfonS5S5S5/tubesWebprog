@@ -17,13 +17,14 @@
         return 0;
     }
     function getGames($conn) {
-        $query = "SELECT game_id, game_name, game_price, game_picture FROM game";
+        $query = "SELECT game_id, game_name, game_price, game_picture, game_developer FROM game";
         $result = mysqli_query($conn, $query);
         $games = [];
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $row['game_image'] = $row['game_picture'];
                 $games[] = $row;
+
             }
         }
         return $games;

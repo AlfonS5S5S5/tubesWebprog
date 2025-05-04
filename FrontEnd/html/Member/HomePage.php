@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once "../../../BackEnd/connection.php";
-require_once "../../../BackEnd/getData.php";
-require_once "../../../BackEnd/Member/themeBG.php";
+    require_once __DIR__ . "/../../../BackEnd/connection.php";
+    require_once __DIR__ . "/../../../BackEnd/getData.php";
+    require_once __DIR__ . "/../../../BackEnd/Member/themeBG.php";
 
 $isLoggedIn = isset($_SESSION['user_id']);
 

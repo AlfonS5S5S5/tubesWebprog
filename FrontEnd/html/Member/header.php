@@ -149,9 +149,16 @@
         require_once __DIR__ . "/../../../BackEnd/getData.php";
     
         updateUserSession($conn, $_SESSION['user_id']);
-    }
-
     
+        $userId = $_SESSION['user_id'];
+        $query = "SELECT user_profile_picture FROM users WHERE user_id = $userId";
+        $result = mysqli_query($conn, $query);
+        $user = mysqli_fetch_assoc($result);
+    
+        $profilePicture = $user['user_profile_picture'] ? "../../../" . $user['user_profile_picture'] : "../../../Assets/profile/default-avatar.png";
+    }
+    
+
 ?>
 
 <header class="steam-header">
@@ -169,7 +176,7 @@
             <div class="user-profile">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <div class="user-info">
-                        <img src="<?php echo $_SESSION['profile_picture'] ?? '../../../Assets/profile/default-avatar.png'; ?>"
+                        <img src="<?php echo $profilePicture; ?>"
                             alt="User Profile Picture"
                             class="user-avatar"
                             onerror="this.src='../../../Assets/profile/default-avatar.png'">
@@ -180,8 +187,6 @@
                     <div class="user-dropdown">
                         <a href="Profile.php" class="dropdown-item">View Profile</a>
                         <div class="dropdown-divider"></div>
-                        <a href="Settings.php" class="dropdown-item">Account Settings</a>
-                        <div class="dropdown-divider"></div>
                         <a href="../../../BackEnd/logout.php" class="dropdown-item">Logout</a>
                     </div>
                 <?php else: ?>
@@ -189,7 +194,7 @@
                         <img src="../../../Assets/profile/default-avatar.png"
                             alt="Default Avatar"
                             class="user-avatar">
-                        <a href="Login.html" class="login-button">Login</a>
+                        <a href="../../../FrontEnd/html/Member/Login.html" class="login-button">Login</a>
                     </div>
                 <?php endif; ?>
             </div>
