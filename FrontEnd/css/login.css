@@ -1,6 +1,12 @@
 body {
-    background-color: blue;
+    /* background-image: url('../../Assets/Background/steamLoginBG.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center; */
+    background-color: #171a21;
     font-family: Arial, sans-serif;
+    /* height: 100vh;
+    margin: 0; */
 }
 header{
     background-color: white;

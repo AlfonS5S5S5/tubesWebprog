@@ -16,7 +16,7 @@ while ($row = mysqli_fetch_array($result)) {
     }
 }
 if ($found) {
-    echo "<script>alert('Login Berhasil, welcome $_SESSION[username]'); window.location.href = '../../FrontEnd/html/Member/Library.php';</script>";
+    echo "<script>alert('Login Berhasil, welcome $_SESSION[username]'); window.location.href = '../../FrontEnd/html/Member/HomePage.php';</script>";
 } else {
     session_destroy();
     echo "<script>alert('Login Gagal'); window.location.href = '../../FrontEnd/html/Member/Login.html';</script>";
