@@ -17,7 +17,6 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-
     require_once __DIR__ . '/../connection.php';
     if(isset($_POST['submit_detail'])){
         $gameID = $_POST['game_id'];
@@ -31,7 +30,7 @@
         $result = mysqli_query($conn, $query);
         $found = false;
 
-        $picture_path = "../../../Assets/";
+        $picture_path = isset($_POST['submit_detail']) ? "../../Assets/":"../../../Assets/";
         while ($row = mysqli_fetch_assoc($result)) {
             if ($row['game_id'] == $gameID) {
                 echo "<h1>" . $row['game_name'] . "</h1>";
