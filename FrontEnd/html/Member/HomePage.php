@@ -44,29 +44,6 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
             id="musim-BG">
     </div>
 
-    <div class="featured-game">
-        <div class="featured-content">
-            <div class="featured-main">
-                <img src="../../../Assets/bg3.jpg" alt="Featured Game" class="featured-image">
-                <div class="featured-info">
-                    <h1>Baldur's Gate 3</h1>
-                    <p class="featured-tag">Top Seller</p>
-                    <p class="featured-description">RPG - Award Winning!</p>
-                    <div class="featured-platforms">
-                        <i class="fab fa-windows"></i>
-                        <i class="fab fa-steam"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="featured-thumbnails">
-                <img src="../../../Assets/cyberpunk2077.jpg" alt="Cyberpunk 2077">
-                <img src="../../../Assets/witcher3.jpg" alt="The Witcher 3">
-                <img src="../../../Assets/eldenring.jpg" alt="Elden Ring">
-                <img src="../../../Assets/terraria.jpg" alt="Terraria">
-            </div>
-        </div>
-    </div>
-
     <main class="store-content">
         <div class="game-container" id="game-section">
             <div class="carousel-wrapper">
