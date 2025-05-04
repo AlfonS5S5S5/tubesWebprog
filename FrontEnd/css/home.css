@@ -221,6 +221,12 @@ body {
     margin-top: 0px;
 }
 
+.wishlist-overlay {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
 .wishlist-btn:hover {
     background: rgba(103, 193, 245, 0.4);
     color: #ffffff;

@@ -83,8 +83,8 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
                                     <button type="submit" name="submit_detail" class="wishlist-btn">Game Details </button>
                                 </form>
                             <?php else: ?>
-                                <a href="Login.html" class="game-link not-logged">
-                                <?php endif; ?>
+                                <a href="Login.html" class="game-link not-logged"></a>
+                            <?php endif; ?>
                                 <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
                                     alt="<?php echo htmlspecialchars($game['game_name']); ?>"
                                     class="game-image"
@@ -97,15 +97,12 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
                                             <div class="wishlist-overlay">
                                                 <form action="../../../BackEnd/Member/addToWishlist.php" method="POST">
                                                     <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
-                                                    <button type="submit" class="wishlist-btn">
-                                                        <i class="far fa-heart"></i> Add to Wishlist
-                                                    </button>
+                                                    <button type="submit" class="wishlist-btn">Add to Wishlist</button>
                                                 </form>
                                             </div>
                                         <?php endif; ?>
                                     </div>
                                 </div>
-                                </a>
                         </div>
                     <?php endforeach; ?>
                 </div>
