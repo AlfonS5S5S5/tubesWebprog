@@ -40,8 +40,5 @@
         echo "<script>alert('Purchase successful!');</script>";
         header("Location: ../../../FrontEnd/html/Member/Library.php");
         exit();
-    } else {
-        echo "<script>alert('Purchase failed!');</script>";
-        header("Location: ../../../FrontEnd/html/Game/BuyGames.php");
     }
 ?>

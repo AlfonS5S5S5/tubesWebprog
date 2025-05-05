@@ -1,10 +1,11 @@
 <?php
-session_start();
     require_once __DIR__ . "/../../../BackEnd/connection.php";
     require_once __DIR__ . "/../../../BackEnd/getData.php";
     require_once __DIR__ . "/../../../BackEnd/Member/themeBG.php";
 
-$isLoggedIn = isset($_SESSION['user_id']);
+    include_once 'header.php';
+    $isLoggedIn = isset($_SESSION['user_id']);
+    $showLoginButton = !$isLoggedIn;
 
 $games = getGames($conn);
 $gamesPerPage = 4;
@@ -32,11 +33,6 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
 </head>
 
 <body>
-    <?php
-    $showLoginButton = !$isLoggedIn;
-    include_once 'header.php';
-    ?>
-
     <div class="background">
         <img src="../../../Assets/Background/<?php echo $backgroundImage; ?>"
             alt="Musim Background"

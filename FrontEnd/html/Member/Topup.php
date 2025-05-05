@@ -1,10 +1,5 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['user_id'])) {
-        header('Location: Login.html');
-        exit();
-    }
-
+    include_once 'header.php';
     require_once __DIR__ . "/../../../BackEnd/connection.php";
     require_once __DIR__ . "/../../../BackEnd/getData.php";
 
@@ -20,10 +15,6 @@
     <link rel="stylesheet" href="../../../FrontEnd/css/Topup.css">
 </head>
 <body>
-    
-    <?php
-        include_once 'header.php';
-    ?>
     <main class="content">
         <div class="wallet-container">
             <h1>Add funds to your Steam Wallet</h1>

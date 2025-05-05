@@ -9,15 +9,6 @@
 <body>
     <?php
 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: ../Member/Login.html");
-        exit();
-    }
-
     require_once __DIR__ . "/../../../BackEnd/connection.php";
     require_once __DIR__ . "/../../../BackEnd/getData.php";
 
