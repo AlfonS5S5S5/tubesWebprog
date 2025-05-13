@@ -160,9 +160,6 @@
         $user = mysqli_fetch_assoc($result);
 
         $profilePicture = $user['user_profile_picture'] ? "../../../" . $user['user_profile_picture'] : "../../../Assets/profile/default-avatar.png";
-    } 
-    else {
-        header("Location: ../../../FrontEnd/html/Member/Login.html");
     }
 
 
