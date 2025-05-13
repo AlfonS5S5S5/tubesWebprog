@@ -51,7 +51,7 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
                     <?php foreach ($currentGames as $game): ?>
                         <div class="game-item">
                             <?php if ($isLoggedIn): ?>
-                                <form action="../../../BackEnd/Game/detailGame.php" method="POST">
+                                <form action="GameDetails.php" method="POST">
                                     <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
                                     <button type="submit" name="submit_detail" class="wishlist-btn">Game Details </button>
                                 </form>
@@ -70,8 +70,9 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
                                             <div class="wishlist-overlay">
                                                 <form action="../../../BackEnd/Member/addToWishlist.php" method="POST">
                                                     <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
-                                                    <button type="submit" class="wishlist-btn">Add to Wishlist</button>
+                                                    <button type="submit_wishlist" class="wishlist-btn">Add to Wishlist</button>
                                                 </form>
+                                                
                                             </div>
                                         <?php endif; ?>
                                     </div>
