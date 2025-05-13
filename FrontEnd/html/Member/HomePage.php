@@ -55,8 +55,6 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
                                     <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
                                     <button type="submit" name="submit_detail" class="wishlist-btn">Game Details </button>
                                 </form>
-                            <?php else: ?>
-                                <a href="Login.html" class="game-link not-logged"></a>
                             <?php endif; ?>
                                 <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
                                     alt="<?php echo htmlspecialchars($game['game_name']); ?>"
