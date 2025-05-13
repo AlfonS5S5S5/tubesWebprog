@@ -3,7 +3,6 @@
     require_once __DIR__ . "/../../../BackEnd/connection.php";
     require_once __DIR__ . "/../../../BackEnd/getData.php";
 
-    updateUserSession($conn, $_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
