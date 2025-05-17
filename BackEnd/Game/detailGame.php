@@ -34,8 +34,6 @@
             if ($row['game_id'] == $gameID) {
                 echo "<div class='game-card'>";
 
-                // Thumbnail
-                //make a fix image size
                 echo "<style>
                         .game-card img {
                             width: 300px;
@@ -59,12 +57,12 @@
                 echo "<div class='game-actions'>";
                 if (isset($_SESSION['user_id'])) {
                     if (getPurchasedStatus($conn, $gameID, $_SESSION['user_id'])) {
-                        echo "<form method='post'>"; // Ganti action sesuai file play game kamu
+                        echo "<form method='post'>";
                         echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
                         echo "<button type='submit'>Play Game</button>";
                         echo "</form>";
                     } else {
-                        echo "<form method='post' action='../../FrontEnd/html/Game/BuyGames.php'>";
+                        echo "<form method='post' action='../../../FrontEnd/html/Game/BuyGames.php'>";
                         echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
                         echo "<button type='submit' name='purchase'>BUY GAME</button>";
                         echo "</form>";
@@ -124,14 +122,24 @@
 
         if ($gameID) {
             $comments = getGameComment($gameID);
+            echo "<table border='1'>";
+            echo "<form method='post' action='processReportComment.php'>";
             foreach ($comments as $comment) {
-                //get user name who comment
+                echo "<tr>";
+                
                 $query = "SELECT user_name FROM users WHERE user_id = '" . $comment['user_id'] . "'";
                 $result = mysqli_query($conn, $query);
                 $user = mysqli_fetch_assoc($result);
 
-                echo "<p><strong>" . htmlspecialchars($user['user_name']) . ":</strong> " . htmlspecialchars($comment['review_text']) . "</p>";
+                echo "<td><p><strong>" . htmlspecialchars($user['user_name']) . ":</strong> " . htmlspecialchars($comment['review_text']) . "</td></p>";
+                echo "<input type='hidden' name='comment_id' value='" . htmlspecialchars($comment['review_id']) . "'>";
+                echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
+                echo "<input type='hidden' name='user_id' value='" . htmlspecialchars($comment['user_id']) . "'>";
+                echo "<td><input type='submit' value='Report Comment' name='report_comment'></td>";
+                echo "</tr>";
             }
+            echo "</form>";
+            echo "</table>";
         }
     }
     ?>

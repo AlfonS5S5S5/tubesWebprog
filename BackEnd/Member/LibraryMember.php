@@ -58,7 +58,7 @@
             }
         } else {
             //direct ke buy game
-            echo "<p>No games found in your library. <br><a href=''>Buy Games</a></p>";
+            echo "<p>No games found in your library. </p>";
         }
     }
 

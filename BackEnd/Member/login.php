@@ -7,8 +7,8 @@ $found = false;
 session_start();
 $role = "";
 while ($row = mysqli_fetch_array($result)) {
-    echo $row['user_name'];
-    if ($row['user_name'] == $_POST['username'] && $row['user_password'] == $_POST['password']) {
+
+    if ($row['user_name'] == $_POST['username'] && $row['user_password'] == $_POST['password'] && $row['user_block_status'] == "UNBLOCKED") {
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['username'] = $row['user_name'];
         $_SESSION['password'] = $row['user_password'];
