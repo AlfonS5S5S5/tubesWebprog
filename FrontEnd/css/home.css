@@ -22,12 +22,6 @@ body {
     padding-top: 500px;
 }
 
-.game-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
 .game-item {
     background: #16202d;
     border-radius: 3px;
@@ -37,7 +31,7 @@ body {
     position: relative;
 }
 
-.game-item:hover .game-actions {
+.game-item:hover {
     transform: scale(1.03);
     opacity: 1;
 }
@@ -68,21 +62,6 @@ body {
     font-size: 18px;
 }
 
-.game-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 10px;
-}
-
-.tag {
-    padding: 2px 8px;
-    background: #384959;
-    color: #67c1f5;
-    border-radius: 2px;
-    font-size: 12px;
-}
-
 .price {
     color: #a4d007;
     font-size: 15px;
@@ -93,40 +72,11 @@ body {
 
 .game-container {
     max-width: 1200px;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 1;
     margin: 0 auto;
     padding: 20px;
-}
-
-.page-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-}
-
-.indicator {
-    width: 8px;
-    height: 8px;
-    background: #2a475e;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.indicator:hover {
-    background: #66c0f4;
-}
-
-.indicator.active {
-    background: #66c0f4;
-}
-
-.carousel-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .game-carousel {
@@ -137,72 +87,8 @@ body {
     animation: slideIn 0.5s ease-out;
 }
 
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
 .game-carousel.slide-left {
     animation: slideLeft 0.5s ease-out;
-}
-
-@keyframes slideLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.nav-button {
-    background: rgba(42, 71, 94, 0.8);
-    color: #fff;
-    border: none;
-    padding: 15px 10px;
-    font-size: 20px;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: background 0.3s ease;
-}
-
-.nav-button:hover {
-    background: rgba(102, 192, 244, 0.8);
-}
-
-.nav-button.prev {
-    left: 0;
-}
-
-.nav-button.next {
-    right: 0;
-}
-
-.nav-button[disabled] {
-    background: rgba(26, 39, 51, 0.5);
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-.game-actions {
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 .wishlist-btn {
@@ -236,42 +122,6 @@ body {
     font-size: 14px;
 }
 
-.wishlist-position {
-    position: fixed;
-    top: 84px;
-    right: 45px;
-    display: flex;
-    align-items: center;
-    padding: 8px
-}
-
-.wishlist-container {
-    background: #5654e3;
-    border: 1px solid #5654e3;
-    border-radius: 2px;
-    transition: all 0.2s ease;
-    min-width: 120px;
-    text-align: center;
-}
-
-.wishlist-container:hover {
-    background: rgba(102, 192, 244, 0.2);
-}
-
-.wishlist-link {
-    text-decoration: none;
-    color: white;
-    font-size: 11px;
-    padding: 6px 10px;
-    display: inline-block;
-    width: 100%;
-    text-transform: uppercase;
-}
-
-.wishlist-link:hover {
-    color: #ffffff;
-}
-
 .background {
     position: absolute;
     top: 0;
@@ -289,14 +139,41 @@ body {
     transition : opacity 0.5s ease-in-out;
 }
 
-.game-link.not-logged {
-    cursor: pointer;
-}
-
-.game-link.not-logged:hover {
-    opacity: 0.9;
-}
-
 .game-info {
     pointer-events: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+    border-radius: 8px;
+}
+
+.page-nav,
+.page-number {
+    padding: 8px 16px;
+    background: rgba(102, 192, 244, 0.1);
+    color: #66c0f4;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    min-width: 40px;
+    text-align: center;
+}
+
+.page-nav:hover,
+.page-number:hover {
+    background: rgba(102, 192, 244, 0.2);
+    transform: translateY(-2px);
+}
+
+.page-number.active {
+    background: #66c0f4;
+    color: white;
 }
