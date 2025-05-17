@@ -21,7 +21,7 @@ if ($found) {
     // echo "<script>alert('Login Berhasil, welcome $_SESSION[username]'); window.location.href = '../../FrontEnd/html/Member/HomePage.php';</script>";
     echo "<script>alert('Login Gagal'); window.location.href = '../../FrontEnd/html/Member/Login.html';</script>";
 
-    $role === "MEMBER" ? header("Location: ../../FrontEnd/html/Member/HomePage.php") : header("Location: ../../FrontEnd/html/Admin/admin.html");
+    $role === "MEMBER" ? header("Location: ../../FrontEnd/html/Member/HomePage.php") : header("Location: ../../FrontEnd/html/Admin/admin.php");
     exit();
 } else {
     session_destroy();
