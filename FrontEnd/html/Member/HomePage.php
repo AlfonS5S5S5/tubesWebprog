@@ -115,19 +115,26 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
             <div class="game-carousel">
                 <?php foreach ($currentGames as $game): ?>
                     <div class="game-item">
-                        <?php if ($isLoggedIn): ?>
-                            <form action="GameDetails.php" method="POST" style="width: 100%;">
-                                <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
-                                <button type="submit" name="submit_detail" style="display:none;"></button>
-                                <div onclick="this.closest('form').querySelector('button').click();" style="cursor: pointer;">
-                                    <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
-                                        alt="<?php echo htmlspecialchars($game['game_name']); ?>" class="game-image"
-                                        onerror="this.src='../../../Assets/default-game.jpg'">
-                                </div>
-                            </form>
-                        <?php endif; ?>
-
                         <div class="game-content">
+                            <!-- bila sudah login akan menampilkan ini -->
+                            <?php if ($isLoggedIn): ?>
+                                <form action="GameDetails.php" method="POST" style="width: 100%;">
+                                    <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
+                                    <button type="submit" name="submit_detail" style="display:none;"></button>
+                                    <div onclick="this.closest('form').querySelector('button').click();" style="cursor: pointer;">
+                                        <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
+                                            alt="<?php echo htmlspecialchars($game['game_name']); ?>" class="game-image"
+                                            onerror="this.src='../../../Assets/default-game.jpg'">
+                                    </div>
+                                </form>
+                            <!-- bila belum login (guest) akan terlihat gambar nya saja -->
+                            <?php else: ?>
+                                <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
+                                alt="<?php echo htmlspecialchars($game['game_name']); ?>" class="game-image"
+                                onerror="this.src='../../../Assets/default-game.jpg'">
+                            <?php endif; ?>
+
+                            <!-- menampilkan semua dibawah gambar yaitu nama, harga, button wishlist atau Tulisan In Library -->
                             <div class="game-info">
                                 <h2><?php echo htmlspecialchars($game['game_name']); ?></h2>
                                 <div class="price">Rp <?php echo number_format($game['game_price'], 0, ',', '.'); ?></div>
