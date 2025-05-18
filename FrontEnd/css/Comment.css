@@ -1,0 +1,54 @@
+.comment {
+  background-color: #1b2838;
+  border: 1px solid #2a475e;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  color: #c7d5e0;
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+}
+
+.comment-author {
+  color: #66c0f4;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+.comment-text {
+  color: #c7d5e0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Optional: table layout adjustment */
+table {
+  background-color: #2a475e;
+  border-style: none;
+  width: 50%;
+  margin-left: 50px;
+}
+tr,th,td{
+    border: none;
+    padding: 10px;
+    text-align: left;
+}
+.report_button {
+    background-color: #2a475e;
+    color: #66c0f4;
+    border: 1px solid #66c0f4;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-right:-50px;
+}
+
+.report_button:hover {
+    background-color: #66c0f4;
+    color: #1b2838;
+    border-color: #66c0f4;
+}

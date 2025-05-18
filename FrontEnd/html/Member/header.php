@@ -4,6 +4,9 @@
 <head>
     <title>Footer</title>
 </head>
+<?php
+session_start();
+?>
 <style>
     .steam-header {
         background: #171a21;
@@ -147,7 +150,7 @@
 <body>
 
     <?php
-    session_start();
+
     if (isset($_SESSION['user_id'])) {
         require_once __DIR__ . "/../../../BackEnd/connection.php";
         require_once __DIR__ . "/../../../BackEnd/getData.php";

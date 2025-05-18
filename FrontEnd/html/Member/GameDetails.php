@@ -27,6 +27,13 @@
         if (isset($_POST['game_id'])) {
             $gameId = $_POST['game_id'];
             echo "<h1>Comments</h1>";
+            echo "<style>
+                h1{
+                    color: #fff;
+                    font-size: 30px;
+                    margin-left: 65px;
+                }
+            </style>";
             showGameComment($gameId);
         } else {
             echo "<p>Error: Game ID tidak ada.</p>";

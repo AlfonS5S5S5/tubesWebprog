@@ -6,24 +6,27 @@ $result = mysqli_query($conn, $query);
 $found = false;
 session_start();
 $role = "";
+$blockStatus = "";
 while ($row = mysqli_fetch_array($result)) {
 
-    if ($row['user_name'] == $_POST['username'] && $row['user_password'] == $_POST['password'] && $row['user_block_status'] == "UNBLOCKED") {
+    if ($row['user_name'] == $_POST['username'] && $row['user_password'] == $_POST['password']) {
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['username'] = $row['user_name'];
         $_SESSION['password'] = $row['user_password'];
         $role = $row['user_role'];
+        $blockStatus = $row['user_block_status'];
         $found = true;
         break;
     }
 }
 if ($found) {
-    // echo "<script>alert('Login Berhasil, welcome $_SESSION[username]'); window.location.href = '../../FrontEnd/html/Member/HomePage.php';</script>";
-    echo "<script>alert('Login Gagal'); window.location.href = '../../FrontEnd/html/Member/Login.html';</script>";
-
-    $role === "MEMBER" ? header("Location: ../../FrontEnd/html/Member/HomePage.php") : header("Location: ../../FrontEnd/html/Admin/admin.php");
+    if ($blockStatus === "BLOCKED") {
+        echo "<script>alert('Akun Anda diblokir'); window.location.href = '../../FrontEnd/html/Member/Login.html';</script>";
+    } else {
+        $role === "MEMBER" ? header("Location: ../../FrontEnd/html/Member/HomePage.php") : header("Location: ../../FrontEnd/html/Admin/admin.php");
+    }
     exit();
 } else {
-    session_destroy();
+
     echo "<script>alert('Login Gagal'); window.location.href = '../../FrontEnd/html/Member/Login.html';</script>";
 }

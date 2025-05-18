@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../css/Comment.css">
 </head>
 
 <style>
@@ -67,16 +68,11 @@
     {   
         
         $query = "INSERT INTO review (user_id, game_id, review_text) VALUES ($userID,$gameId,'$comment')";
-        echo $comment;
-        echo $gameId;
-        echo $userID;
-        echo $comment;
+   
         if (mysqli_query($conn, $query)) {
             echo "<script>alert('Berhasil comment!');</script>";
-            echo "<script>window.location.href = './HomePage.php';</script>";
         } else {
             echo "<script>alert('Gagal comment!');</script>";
-            echo "<script>window.location.href = './HomePage.php';</script>";
         }
     }
     ?>

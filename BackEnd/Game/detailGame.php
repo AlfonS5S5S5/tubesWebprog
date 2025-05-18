@@ -59,12 +59,12 @@
                     if (getPurchasedStatus($conn, $gameID, $_SESSION['user_id'])) {
                         echo "<form method='post'>";
                         echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
-                        echo "<button type='submit'>Play Game</button>";
+                        echo "<button type='submit' class='purchase-buy-button'>Play Game</button>";
                         echo "</form>";
                     } else {
                         echo "<form method='post' action='../../../FrontEnd/html/Game/BuyGames.php'>";
                         echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
-                        echo "<button type='submit' name='purchase'>BUY GAME</button>";
+                        echo "<button type='submit' name='purchase' class='purchase-buy-button'>BUY GAME</button>";
                         echo "</form>";
                     }
                 } else {
@@ -123,22 +123,29 @@
         if ($gameID) {
             $comments = getGameComment($gameID);
             echo "<table border='1'>";
-            echo "<form method='post' action='processReportComment.php'>";
             foreach ($comments as $comment) {
-                echo "<tr>";
-                
                 $query = "SELECT user_name FROM users WHERE user_id = '" . $comment['user_id'] . "'";
                 $result = mysqli_query($conn, $query);
                 $user = mysqli_fetch_assoc($result);
+                
+                echo "<tr>";
+                echo "<td>";
+                echo "<div class='comment'>";
+                echo "<strong class='comment-author'>" . htmlspecialchars($user['user_name']) . ":</strong> ";
+                echo "<span class='comment-text'>" . htmlspecialchars($comment['review_text']) . "</span>";
+                echo "</div>";
+                echo "</td>";
 
-                echo "<td><p><strong>" . htmlspecialchars($user['user_name']) . ":</strong> " . htmlspecialchars($comment['review_text']) . "</td></p>";
+                // Buka form baru untuk setiap comment
+                echo "<td>";
+                echo "<form method='post' action='../../../BackEnd/Game/processReportComment.php'>";
                 echo "<input type='hidden' name='comment_id' value='" . htmlspecialchars($comment['review_id']) . "'>";
                 echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
-                echo "<input type='hidden' name='user_id' value='" . htmlspecialchars($comment['user_id']) . "'>";
-                echo "<td><input type='submit' value='Report Comment' name='report_comment'></td>";
+                echo "<input type='submit' class='report_button' name='report_comment' value='Report Comment'>";
+                echo "</form>";
+                echo "</td>";
                 echo "</tr>";
             }
-            echo "</form>";
             echo "</table>";
         }
     }
