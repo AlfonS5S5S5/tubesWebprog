@@ -7,21 +7,15 @@
 </head>
 
 <body>
-    <?php
 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+
+    <?php
+    include_once __DIR__ . "/../Member/header.php";
 
     if (!isset($_SESSION['user_id'])) {
-        header("Location: ../Member/Login.html");
+        header("Location: ../../../FrontEnd/html/Member/Login.html");
         exit();
     }
-    ?>
-
-
-    <?php
-    include_once 'header.php';
     ?>
 
     <form method="post" action="../../../BackEnd/Member/updateProfile.php" enctype="multipart/form-data">

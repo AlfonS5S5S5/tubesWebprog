@@ -13,17 +13,24 @@
     <div class="comment-section">
         <?php
         include_once __DIR__ . "/header.php";
+
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: ../../../FrontEnd/html/Member/Login.html");
+            exit();
+        }
+        
         include_once __DIR__ . "/../../../BackEnd/connection.php";
         include_once __DIR__ . "/../../../BackEnd/Game/detailGame.php";
-       
+        
         if (isset($_POST['game_id'])) {
 
             $gameId = $_POST['game_id'];
-          
+        
             include __DIR__ . "/comment.php";
         } else {
             echo "<p>Error: Game ID tidak ada.</p>";
         }
+        
         if (isset($_POST['game_id'])) {
             $gameId = $_POST['game_id'];
             echo "<h1>Comments</h1>";
