@@ -22,7 +22,7 @@ $game = mysqli_fetch_assoc($result);
 
 if (!$game) {
     echo "Game Not Found";
-    header("Location: ../../../FrontEnd/html/Member/HomePage.php");
+    header("Location: /../../FrontEnd/html/Member/HomePage.php");
     exit();
 }
 
