@@ -3,6 +3,10 @@ include_once 'header.php';
 require_once __DIR__ . "/../../../BackEnd/connection.php";
 require_once __DIR__ . "/../../../BackEnd/getData.php";
 
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: ../../../FrontEnd/html/Member/Login.html");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +51,7 @@ require_once __DIR__ . "/../../../BackEnd/getData.php";
                         <h3>Or enter custom amount:</h3>
                         <div class="custom-input-wrapper">
                             <span class="currency-prefix">Rp.</span>
-                            <input type="number" id="custom_amount" placeholder="Enter amount" min="10" max="1000"
+                            <input type="number" id="custom_amount" placeholder="Enter amount" min="1000"
                                 step="1">
                         </div>
                     </div>

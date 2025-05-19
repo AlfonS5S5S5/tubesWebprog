@@ -163,9 +163,12 @@ session_start();
         $user = mysqli_fetch_assoc($result);
 
         $profilePicture = $user['user_profile_picture'] ? "../../../" . $user['user_profile_picture'] : "../../../Assets/profile/default-avatar.png";
+
+
+        $pathLibrary = "../../../FrontEnd/html/Member/Library.php";
+        $pathWishList = "../../../FrontEnd/html/Member/Wishlist.php";
+        $pathTopUp = "../../../FrontEnd/html/Member/TopUp.php";
     }
-
-
     ?>
 
     <header class="steam-header">
@@ -174,9 +177,9 @@ session_start();
             <ul class="nav-left">
                 <li><a href="HomePage.php">Home Page</a></li>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <li><a href="Library.php">Library</a></li>
-                    <li><a href="WishList.php">Wishlist</a></li>
-                    <li><a href="TopUp.php">TopUp</a></li>
+                    <li><a href="<?php echo $pathLibrary?>">Library</a></li>
+                    <li><a href="<?php echo $pathWishList?>">Wishlist</a></li>
+                    <li><a href="<?php echo $pathTopUp?>">TopUp</a></li>
                 <?php endif; ?>
             </ul>
             <div class="nav-right">

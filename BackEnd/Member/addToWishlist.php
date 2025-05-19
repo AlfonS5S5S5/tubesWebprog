@@ -26,18 +26,28 @@ if (isset($_POST['game_id']) && isset($_SESSION['user_id'])) {
         $resultSelect = mysqli_query($conn, $querySelect);
 
         if (mysqli_num_rows($resultSelect) > 0) {
-            echo "<script>alert('Game sudah ada di wishlist!');</script>";
+            echo "<script>alert('Game sudah ada di wishlist!');
+                window.location.href = '../../FrontEnd/html/Member/HomePage.php';
+            </script>";
         } else {
             $queryInsert = "INSERT INTO wishlist (user_id, game_id, wishlist_date_added) VALUES ('$user_id', '$game_id', '$date')";
             if (mysqli_query($conn, $queryInsert)) {
-                echo "<script>alert('Game berhasil masuk ke wishlist!');</script>";
+                echo "<script>alert('Game berhasil masuk ke wishlist!');
+                    window.location.href = '../../FrontEnd/html/Member/Wishlist.php';
+                </script>";
             } else {
-                echo "<script>alert('Gagal menambahkan ke wishlist.');</script>";
+                echo "<script>alert('Gagal menambahkan ke wishlist.');
+                    window.location.href = '../../FrontEnd/html/Member/HomePage.php';
+                </script>";
             }
         }
     } else {
-        echo "<script>alert('Wishlist penuh. Maksimal 5 game.');</script>";
+        echo "<script>alert('Wishlist penuh. Maksimal 5 game.');
+            window.location.href = '../../FrontEnd/html/Member/HomePage.php';
+        </script>";
     }
 } else {
-    echo "<script>alert('Permintaan tidak valid.');</script>";
+    echo "<script>alert('Permintaan tidak valid.');
+        window.location.href = '../../FrontEnd/html/Member/HomePage.php';
+    </script>";
 }

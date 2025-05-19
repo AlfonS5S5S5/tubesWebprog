@@ -177,3 +177,136 @@ body {
     background: #66c0f4;
     color: white;
 }
+
+.owned {
+    background : #5c7e10;
+    color: white;
+    padding: 6px 8px;
+    font-size : 12px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+/* ajax */
+
+.search-wrapper {
+    width: 300px;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 620px;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #316282;
+    border-radius: 3px;
+    padding: 5px 8px;
+    transition: all 0.2s ease;
+}
+
+.search-box:hover,
+.search-box:focus-within {
+    background: #407899;
+}
+
+.search-icon {
+    width: 17px;
+    height: 17px;
+    margin-right: 8px;
+    opacity: 0.6;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 5px 8px;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    color: #fff;
+}
+
+#searchInput::placeholder {
+    color: #a4d7f5;
+    opacity: 0.6;
+}
+
+#searchInput:focus {
+    outline: none;
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1b2838;
+    margin-top: 5px;
+    border: 1px solid #4c6b22;
+    border-radius: 3px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #2a475e;
+}
+
+.search-result-item form {
+    margin: 0;
+    padding: 0;
+}
+
+.search-result-item:hover {
+    background: #2a475e;
+}
+
+.search-result-item img {
+    width: 120px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-right: 15px;
+}
+
+.search-result-info {
+    flex: 1;
+}
+
+.search-result-name {
+    color: #c7d5e0;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.search-result-price {
+    color: #8bc53f;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.search-result-content {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.search-result-content:hover {
+    background: #2a475e;
+}

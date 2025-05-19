@@ -7,7 +7,7 @@ require_once __DIR__ . "/../connection.php";
 require_once __DIR__ . "/../getData.php";
 
 if (!isset($_POST['submit_purchase']) || !isset($_POST['game_id']) || !isset($_POST['user_id'])) {
-    header("Location: ../../../FrontEnd/html/Member/HomePage.php");
+    header("Location: ../../FrontEnd/html/Member/HomePage.php");
     exit();
 }
 

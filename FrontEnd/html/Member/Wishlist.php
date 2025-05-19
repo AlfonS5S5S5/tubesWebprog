@@ -20,23 +20,31 @@
 <body>
 
     <?php
-    include_once __DIR__ . "/header.php";
-    echo "<h1>$_SESSION[username]'s Wishlist</h1>";
-    require_once __DIR__ . "/../../../BackEnd/connection.php";
-    include("../../../BackEnd/Game/detailGame.php");
-    $query = "SELECT game.game_id, game.game_name, game.game_price, wishlist.wishlist_date_added
-              FROM wishlist
-              JOIN game ON wishlist.game_id = game.game_id
-              WHERE wishlist.user_id = '" . $_SESSION['user_id'] . "'";
-    $result = mysqli_query($conn, $query);
-
-    if ($result) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            showDetailGame($row['game_id']);
-        }
+include_once __DIR__ . "/header.php";
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: ../../../FrontEnd/html/Member/Login.html");
+        exit();
     } else {
-        echo "<p>Error retrieving wishlist items.</p>";
+        
+        echo "<h1>$_SESSION[username]'s Wishlist</h1>";
+        require_once __DIR__ . "/../../../BackEnd/connection.php";
+        include("../../../BackEnd/Game/detailGame.php");
+        $query = "SELECT game.game_id, game.game_name, game.game_price, wishlist.wishlist_date_added
+                FROM wishlist
+                JOIN game ON wishlist.game_id = game.game_id
+                WHERE wishlist.user_id = '" . $_SESSION['user_id'] . "'";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                showDetailGame($row['game_id']);
+            }
+        } else {
+            echo "<p>Error retrieving wishlist items.</p>";
+        }
     }
+
+    
 
     ?>
 </body>
