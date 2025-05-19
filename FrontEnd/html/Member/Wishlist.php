@@ -37,7 +37,8 @@ include_once __DIR__ . "/header.php";
 
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
-                showDetailGame($row['game_id']);
+                showDetailGame($row['game_id'], true);
+               
             }
         } else {
             echo "<p>Error retrieving wishlist items.</p>";

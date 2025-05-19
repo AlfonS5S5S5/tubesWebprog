@@ -52,7 +52,7 @@
                 SortByGenre($conn, $_POST['sortBy']);
             } else {
                 foreach ($rows as $row) {
-                    showDetailGame($row['game_id']);
+                    showDetailGame($row['game_id'],false);
                     echo "<hr>";
                 }
             }
@@ -69,7 +69,7 @@
 
         if ($result && mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                showDetailGame($row['game_id']);
+                showDetailGame($row['game_id'],false);
                 echo "<hr>";
             }
         } else {
