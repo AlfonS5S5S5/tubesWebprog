@@ -17,10 +17,11 @@
     require_once __DIR__ . '/../connection.php';
     if (isset($_POST['submit_detail'])) {
         $gameID = $_POST['game_id'];
-        showDetailGame($gameID);
+        $Wishlist = false;
+        showDetailGame($gameID, $Wishlist);
     }
 
-    function showDetailGame($gameID)
+    function showDetailGame($gameID, $Wishlist)
     {
         global $conn;
 
@@ -65,6 +66,13 @@
                         echo "<form method='post' action='../../../FrontEnd/html/Game/BuyGames.php'>";
                         echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
                         echo "<button type='submit' name='purchase' class='purchase-buy-button'>BUY GAME</button>";
+                        echo "</form>";
+                    }
+                    if ($Wishlist) {
+                        echo "<form method='post' action='../../../BackEnd/Member/removeWishlist.php'>";
+                        echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
+                        echo "<input type='hidden' name='user_id' value='" . htmlspecialchars($_SESSION['user_id']) . "'>";
+                        echo "<button type='submit' name='remove_wishlist' class='remove-wishlist-button'>Remove from Wishlist</button>";
                         echo "</form>";
                     }
                 } else {
@@ -127,7 +135,7 @@
                 $query = "SELECT user_name FROM users WHERE user_id = '" . $comment['user_id'] . "'";
                 $result = mysqli_query($conn, $query);
                 $user = mysqli_fetch_assoc($result);
-                
+
                 echo "<tr>";
                 echo "<td>";
                 echo "<div class='comment'>";
