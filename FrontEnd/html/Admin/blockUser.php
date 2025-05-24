@@ -13,10 +13,12 @@ $result = mysqli_query($conn, $sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Manage Block Reports</title>
     <link rel="stylesheet" type="text/css" href="../../css/blockUser.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Manage Block Reports</h1>
@@ -30,34 +32,41 @@ $result = mysqli_query($conn, $sql);
             </tr>
             <?php
             if (mysqli_num_rows($result) > 0) {
+                $block_rows = [];
                 while ($row = mysqli_fetch_assoc($result)) {
-                    // Get user information
+                    $block_rows[] = $row;
+                }
+
+                foreach ($block_rows as $row) {
                     $user_id = $row['user_id'];
-                    $query = "SELECT user_name FROM users WHERE user_id = '$user_id'";
-                    $result = mysqli_query($conn, $query);
-                    $data = mysqli_fetch_assoc($result);
-                    $username = $data ? $data['user_name'] : 'Unknown User';
-                    
-                    echo "<tr>";
-                    echo "<td>" . $row['block_id'] . "</td>";
-                    echo "<td>" . $row['user_id'] . "</td>";
-                    echo "<td>" . $row['block_reason'] . "</td>";
-                    echo "<td class='" . strtolower($row['block_status']) . "'>" . $row['block_status'] . "</td>";
-                    echo "<td>";
-                    echo "<form action='../../../BackEnd/Admin/manageBlock.php' method='POST'>
-                            <input type='hidden' name='block_id' value='" . $row['block_id'] . "'>
-                            <input type='hidden' name='user_id' value='" . $row['user_id'] . "'>
-                            <input type='submit' name='accept' value='Accepted' class='block-btn'>
-                        </form>";
-                    echo "</td>";
-                    echo "</tr>";
+                    $user_query = "SELECT user_name, user_role FROM users WHERE user_id = '$user_id'";
+                    $user_result = mysqli_query($conn, $user_query);
+                    $user_data = mysqli_fetch_assoc($user_result);
+                    $username = $user_data ? $user_data['user_name'] : 'Unknown User';
+
+                    $user_role = $user_data ? $user_data['user_role'] : '';
+                    if ($user_role !== 'ADMIN') {
+                        echo "<tr>";
+                        echo "<td>" . $row['block_id'] . "</td>";
+                        echo "<td>" . $row['user_id'] . "</td>";
+                        echo "<td>" . $row['block_reason'] . "</td>";
+                        echo "<td class='" . strtolower($row['block_status']) . "'>" . $row['block_status'] . "</td>";
+                        echo "<td>";
+                        echo "<form action='../../../BackEnd/Admin/manageBlock.php' method='POST'>
+                        <input type='hidden' name='block_id' value='" . $row['block_id'] . "'>
+                        <input type='hidden' name='user_id' value='" . $row['user_id'] . "'>
+                        <input type='submit' name='accept' value='Accepted' class='block-btn'>
+                    </form>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
                 }
             } else {
                 echo "<tr><td colspan='5'>No pending block reports found</td></tr>";
             }
             ?>
         </table>
-        
+
         <h2>Blocked Users</h2>
         <table>
             <tr>
@@ -68,7 +77,7 @@ $result = mysqli_query($conn, $sql);
             <?php
             $blocked_sql = "SELECT user_id, user_name FROM users WHERE user_block_status = 'BLOCKED'";
             $blocked_result = mysqli_query($conn, $blocked_sql);
-            
+
             if (mysqli_num_rows($blocked_result) > 0) {
                 while ($row = mysqli_fetch_assoc($blocked_result)) {
                     echo "<tr>";
@@ -90,4 +99,5 @@ $result = mysqli_query($conn, $sql);
         <a href="admin.php" class="back-btn">Back to Dashboard</a>
     </div>
 </body>
+
 </html>
