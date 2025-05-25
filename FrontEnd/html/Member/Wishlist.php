@@ -41,7 +41,7 @@ include_once __DIR__ . "/header.php";
                
             }
         } else {
-            echo "<p>Error retrieving wishlist items.</p>";
+            echo "<p>Error.</p>";
         }
     }
 

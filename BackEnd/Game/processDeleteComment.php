@@ -61,7 +61,6 @@
             margin-bottom: 12px;
             color: #c7d5e0;
         }
-
         #reportReason {
             width: 100%;
             padding: 12px 15px;
@@ -109,68 +108,27 @@
     </div>
     <?php
     require_once('../connection.php');
-
-    $gameId = $_POST['game_id'];
     $commentId = $_POST['comment_id'];
-    $userId = '';
+
 
     if ($commentId) {
-
-        $queryUser = "SELECT user_id FROM review WHERE review_id = '$commentId'";
-        $resultUser = mysqli_query($conn, $queryUser);
-        if ($rowUser = mysqli_fetch_assoc($resultUser)) {
-            $userId = $rowUser['user_id'];
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
-    }
+        $userId = $_SESSION['user_id'];
 
-    $reportReasons = [
-        'Death threats',
-        'Racist',
-        'Bad Violence',
-        'Hate speech'
-    ];
+        $query = "DELETE FROM review WHERE review_id = '$commentId'";
 
-    $query = "SELECT * FROM review WHERE game_id = '$gameId' AND user_id = '$userId'";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
-
-    echo "<div class='report-container'>";
-    echo "<form method='POST' action=''>";
-    echo "<input type='hidden' name='user_id' value='$userId'>";
-    echo "<input type='hidden' name='game_id' value='$gameId'>";
-    echo "<input type='hidden' name='comment_id' value='$commentId'>";
-    echo "<label for='Report' id='reportLabel'>Report Reason: </label>";
-    echo "<select name ='reason' id='reportReason' onchange='this.form.submit()'>";
-
-    $selectedReason = $_POST['reason'] ?? 'None';
-
-    echo "<option value='None'" . ($selectedReason === 'None' ? ' selected' : '') . ">Select Reason</option>";
-    foreach ($reportReasons as $reason) {
-        $isSelected = $reason === $selectedReason ? 'selected' : '';
-        echo "<option value='$reason' $isSelected>$reason</option>";
-    }
-
-    echo "</select><br>";
-    echo "<input type='submit' class='submit-report'name='report_comment' value='Report Comment'>";
-    echo "</form>";
-    echo "</div>";
-    if (isset($_POST['report_comment']) && isset($_POST['reason'])) {
-        $reason = $_POST['reason'];
-        if ($reason !== 'None') {
-            reportComment($conn, $userId, $reason);
-        } else {
-            echo "<script>alert('Pilih alasan report.');</script>";
-        }
-    }
-    function reportComment($conn, $userId, $reason)
-    {
-        $query = "INSERT INTO block (user_id, block_reason,block_status) VALUES ('$userId', '$reason', 'PENDING')";
         if (mysqli_query($conn, $query)) {
-            echo "<script>alert('Report Berhasil!'); window.location.href = '../../FrontEnd/html/Member/HomePage.php';</script>";
+
+            echo "<script>alert('Berhasil delete comment!'); window.location.href = '../../FrontEnd/html/Member/HomePage.php';</script>";
             exit();
         } else {
-            echo "<script>alert('Gagal report.'); window.location.href = '../../FrontEnd/html/Member/HomePage.php';</script>";
+            echo "<script>alert('Gagal delete comment'); window.location.href = '../../FrontEnd/html/Member/HomePage.php';</script>";
+            exit();
         }
+    } else {
+        echo "Game ID tidak ada.";
     }
     ?>
 

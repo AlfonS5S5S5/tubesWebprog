@@ -135,6 +135,9 @@
                 $query = "SELECT user_name FROM users WHERE user_id = '" . $comment['user_id'] . "'";
                 $result = mysqli_query($conn, $query);
                 $user = mysqli_fetch_assoc($result);
+                $queryUserLogin = "SELECT user_id FROM users WHERE user_id = '" . $_SESSION['user_id'] . "'";
+                $resultUserLogin = mysqli_query($conn, $queryUserLogin);
+                $userLogin = mysqli_fetch_assoc($resultUserLogin);
 
                 echo "<tr>";
                 echo "<td>";
@@ -144,14 +147,24 @@
                 echo "</div>";
                 echo "</td>";
 
-                // Buka form baru untuk setiap comment
-                echo "<td>";
-                echo "<form method='post' action='../../../BackEnd/Game/processReportComment.php'>";
-                echo "<input type='hidden' name='comment_id' value='" . htmlspecialchars($comment['review_id']) . "'>";
-                echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
-                echo "<input type='submit' class='report_button' name='report_comment' value='Report Comment'>";
-                echo "</form>";
-                echo "</td>";
+                if ($_SESSION['user_id'] !== $comment['user_id']) {
+                    //report 
+                    echo "<td>";
+                    echo "<form method='post' action='../../../BackEnd/Game/processReportComment.php'>";
+                    echo "<input type='hidden' name='comment_id' value='" . htmlspecialchars($comment['review_id']) . "'>";
+                    echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
+                    echo "<input type='submit' class='report_button' name='report_comment' value='Report Comment'>";
+                    echo "</form>";
+                    echo "</td>";
+                } else {
+                    //delete
+                    echo "<td>";
+                    echo "<form method='post' action='../../../BackEnd/Game/processDeleteComment.php'>";
+                    echo "<input type='hidden' name='comment_id' value='" . htmlspecialchars($comment['review_id']) . "'>";
+                    echo "<input type='submit' class='delete_button' name='delete_comment' value='Delete Comment'>";
+                    echo "</form>";
+                    echo "</td>";
+                }
                 echo "</tr>";
             }
             echo "</table>";
