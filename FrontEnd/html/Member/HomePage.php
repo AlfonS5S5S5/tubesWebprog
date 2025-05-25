@@ -45,6 +45,8 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
         <img src="../../../Assets/Background/<?php echo $backgroundImage; ?>" alt="Musim Background" class="background"
             id="musim-BG">
     </div>
+
+    <?php if ($isLoggedIn): ?>
     <div class="search-wrapper">
         <div class=search-container>
             <div class="search-box">
@@ -55,6 +57,7 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
             <div id="searchResults" class="search-results"></div>
         </div>
     </div>
+    <?php endif; ?>
 
     <script>
         function searchGames(str) {
