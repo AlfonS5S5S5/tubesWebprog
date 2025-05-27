@@ -12,6 +12,13 @@ function checkLibrary($conn, $userId, $gameId)
     return mysqli_num_rows($result) > 0;
 }
 
+function checkWishlist($conn, $userId, $gameId)
+{
+    $query = "SELECT * FROM wishlist WHERE user_id = '$userId' AND game_id = '$gameId'";
+    $result = mysqli_query($conn, $query);
+    return mysqli_num_rows($result) > 0;
+}
+
 $isLoggedIn = isset($_SESSION['user_id']);
 $showLoginButton = !$isLoggedIn;
 
@@ -144,11 +151,15 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
                                 <?php if ($isLoggedIn): ?>
                                     <?php if (!checkLibrary($conn, $_SESSION['user_id'], $game['game_id'])): ?>
                                         <div class="wishlist-overlay">
-                                            <form action="../../../BackEnd/Member/addToWishlist.php" method="POST">
-                                                <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
-                                                <button type="submit" name="submit_wishlist" class="wishlist-btn">Add to
-                                                    Wishlist</button>
-                                            </form>
+                                            <?php if (!checkWishlist($conn, $_SESSION['user_id'], $game['game_id'])): ?>
+                                                <form action="../../../BackEnd/Member/addToWishlist.php" method="POST">
+                                                    <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
+                                                    <button type="submit" name="submit_wishlist" class="wishlist-btn">Add to
+                                                        Wishlist</button>
+                                                </form>
+                                            <?php else: ?>
+                                                <div class="owned">Already in wishlist</div>
+                                            <?php endif; ?>
                                         </div>
                                     <?php else: ?>
                                         <div class="owned">In Library</div>
