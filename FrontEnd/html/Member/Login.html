@@ -1,23 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <link rel="stylesheet" type="text/css" href="../../css/login.css">
-    <div class = "login">
-    <header>Login</header> 
-    <form action="../../../BackEnd/Member/login.php" method="post" name ="loginForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <link rel="stylesheet" type="text/css" href="../../css/login.css">
+        <div class = "login">
+        <h2>Login</h2>
+        <form action="../../../BackEnd/Member/login.php" method="post" name ="loginForm">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
 
-        Don't Have an Account? <a href="Register.html" class="register">Register</a><br><br>
-        <input type="submit" value="Login">
-    </form>
-    </div> 
-</body>
-</html>
+            Don't Have an Account? <a href="Register.html" class="register">Register</a><br><br>
+            <input type="submit" value="Login">
+        </form>
+        </div> 
+    </body>
+    </html>
