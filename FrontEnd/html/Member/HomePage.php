@@ -158,7 +158,7 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
                                                         Wishlist</button>
                                                 </form>
                                             <?php else: ?>
-                                                <div class="owned">Already in wishlist</div>
+                                                <div class="ownedWishlist">Already in wishlist</div>
                                             <?php endif; ?>
                                         </div>
                                     <?php else: ?>

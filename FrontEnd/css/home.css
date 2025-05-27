@@ -186,6 +186,14 @@ body {
     text-align: center;
     margin-top: 10px;
 }
+.ownedWishlist {
+    background : #b73bff;
+    color: white;
+    padding: 6px 8px;
+    font-size : 12px;
+    text-align: center;
+    margin-top: 10px;
+}
 
 
 /* ajax */
