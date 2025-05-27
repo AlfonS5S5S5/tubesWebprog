@@ -17,18 +17,13 @@ if (isset($_POST['game_id']) && isset($_SESSION['user_id'])) {
     $countRow = mysqli_fetch_assoc($resultCount);
 
     if ($countRow['count'] < 5) {
-        // Cek apakah game sudah ada di wishlist
-        $querySelect = "SELECT * FROM wishlist WHERE user_id = '$user_id' AND game_id = '$game_id'";
-        $resultSelect = mysqli_query($conn, $querySelect);
-
-
         $queryInsert = "INSERT INTO wishlist (user_id, game_id, wishlist_date_added) VALUES ('$user_id', '$game_id', '$date')";
         if (mysqli_query($conn, $queryInsert)) {
             echo "<script>alert('Game berhasil masuk ke wishlist!');
                     window.location.href = '../../FrontEnd/html/Member/Wishlist.php';
                 </script>";
         } else {
-            echo "<script>alert('Gagal menambahkan ke wishlist.');
+            echo "<script>alert('Game sudah ada di wishlist.');
                     window.location.href = '../../FrontEnd/html/Member/HomePage.php';
                 </script>";
         }

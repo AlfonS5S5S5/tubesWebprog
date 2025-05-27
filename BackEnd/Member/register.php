@@ -11,10 +11,10 @@
         }
     }
     if(!$found) {
-        $query = "INSERT INTO users (user_name, user_password) VALUES ('".$_POST['username']."', '".$_POST['password']."')";
+        $query = "INSERT INTO users (user_name, user_password) VALUES ('".$_POST['username']."', '".md5($_POST['password'])."')";
         mysqli_query($conn, $query);
         echo "<script>alert('Register Berhasil'); window.location.href = '../../FrontEnd/html/Member/Login.html';</script>";
     } else {
-        echo "<script>alert('Username sudah terdaftar'); window.location.href = '../../FrontEnd/html/Member/Register.html'';</script>";
+        echo "<script>alert('Username sudah dipakai'); window.location.href = '../../FrontEnd/html/Member/Register.html';</script>";
     }
 ?>
