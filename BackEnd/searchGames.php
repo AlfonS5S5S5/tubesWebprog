@@ -12,10 +12,7 @@ if (isset($_GET['q'])) {
     
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "ID: " . $row['game_id'] .
-                    ", Name: " . $row['game_name'] .
-                    ", Image: " . $row['game_picture'] .
-                    ", Price: " . $row['game_price'] . "\n";
+            echo $row['game_id'] . "|" . $row['game_name'] . "|" . $row['game_picture'] . "|" . $row['game_price'] . "\n";
         }
     }
 }

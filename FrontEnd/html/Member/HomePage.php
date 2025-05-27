@@ -74,22 +74,27 @@ $featuredGames = array_slice($games, 0, 4);
                     if (gameEntries.length > 0) {
                         gameEntries.forEach(function (entry) {
                             if (entry.trim() !== '') {
-                                // Parse the game data from the string
-                                var gameData = entry.match(/ID: (.*?), Name: (.*?), Image: (.*?), Price: (.*?)$/);
-
-                                if (gameData) {
+                                
+                                var gameData = entry.split('|');
+                                
+                                if (gameData.length === 4) {
+                                    var gameId = gameData[0];
+                                    var gameName = gameData[1];
+                                    var gameImage = gameData[2];
+                                    var gamePrice = gameData[3];
+                                    
                                     var gameDiv = document.createElement('div');
                                     gameDiv.className = 'search-result-item';
-                                    // Create a form for each game result
+
                                     gameDiv.innerHTML = `
                                         <form action="GameDetails.php" method="POST" style="width: 100%;">
-                                            <input type="hidden" name="game_id" value="${gameData[1]}">
+                                            <input type="hidden" name="game_id" value="${gameId}">
                                             <button type="submit" name="submit_detail" style="display:none;"></button>
                                             <div class="search-result-content" onclick="this.closest('form').querySelector('button').click();">
-                                                <img src="../../../Assets/${gameData[3]}" onerror="this.src='../../../Assets/default-game.jpg'">
+                                                <img src="../../../Assets/${gameImage}" onerror="this.src='../../../Assets/default-game.jpg'">
                                                 <div class="search-result-info">
-                                                    <div class="search-result-name">${gameData[2]}</div>
-                                                    <div class="search-result-price">Rp ${Number(gameData[4]).toLocaleString()}</div>
+                                                    <div class="search-result-name">${gameName}</div>
+                                                    <div class="search-result-price">Rp ${Number(gamePrice).toLocaleString()}</div>
                                                 </div>
                                             </div>
                                         </form>
