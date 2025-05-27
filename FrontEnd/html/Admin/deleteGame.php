@@ -13,44 +13,81 @@ $result = mysqli_query($conn, $sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Delete Games</title>
     <link rel="stylesheet" type="text/css" href="../../css/deleteGame.css">
 </head>
+
+<style>
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 40px;
+        color: #66c0f4;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    #search {
+        width: 100%;
+        max-width: 500px;
+        padding: 14px 18px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        background-color: #2a475e;
+        color: #c7d5e0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+        text-align: center;
+
+    }
+
+    #search::placeholder {
+        color: #7f9db9;
+    }
+
+    #search:focus {
+        background-color: #1c3a4f;
+        outline: 2px solid #66c0f4;
+    }
+</style>
+
 <body>
-    <form method="POST" action="../../../BackEnd/Admin/deleteGame.php">
-        <table>
-            <tr>
-                <th>Game ID</th>
-                <th>Game Name</th>
-                <th>Genre</th>
-                <th>Developer</th>
-                <th>Release Date</th>
-                <th>Price</th>
-                <th>Supported OS</th>
-                <th>Type</th>
-                <th>Image</th>
-                <th>CheckBox</th>
-            </tr>
-            <?php
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "<tr>";
-                echo "<td>" . $row['game_id'] . "</td>";
-                echo "<td>" . $row['game_name'] . "</td>";
-                echo "<td>" . $row['game_genre'] . "</td>";
-                echo "<td>" . $row['game_developer'] . "</td>";
-                echo "<td>" . $row['game_release_date'] . "</td>";
-                echo "<td>Rp " . number_format($row['game_price'], 0, ',', '.') . "</td>";
-                echo "<td>" . $row['game_supported_os'] . "</td>";
-                echo "<td>" . $row['game_type'] . "</td>";
-                echo "<td><img src='../../../Assets/" . $row['game_picture'] . "' alt='" . $row['game_name'] . "'></td>";
-                echo "<td><input type='checkbox' name='selected_games[]' value='" . $row['game_id'] . "'></td>";
-                echo "</tr>";
-            }
-            ?>
-        </table>
-        <input type="submit" name="delete" value="Delete Selected Games" class="submit-btn">
-    </form>
+    <div class="container">
+        <h1>DELETE GAMES</h1>
+        <input type="text" id="search" placeholder="Search games" onkeyup="filterGames(this.value)">
+    </div>
+
+    <script>
+        function filterGames(str) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("showSearched").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "../../../BackEnd/Admin/searchGame.php?q=" + str, true);
+            xmlhttp.send();
+        }
+    </script>
+    <div id="showSearched"></div>
+
     <a href="admin.php" class="back-btn">Back to Dashboard</a>
+    <script>
+        filterGames("");
+    </script>
 </body>
+
 </html>

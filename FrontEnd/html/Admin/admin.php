@@ -23,5 +23,6 @@ if (!isset($_SESSION['user_id'])) {
         
         <a href="../../../BackEnd/logout.php" style="color: red; text-decoration: none; display: block; text-align: center; margin-top: 20px;">Logout</a>
     </div>
+    
 </body>
 </html>
