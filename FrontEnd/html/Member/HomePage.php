@@ -5,15 +5,13 @@ require_once __DIR__ . "/../../../BackEnd/Member/themeBG.php";
 
 include_once 'header.php';
 
-function checkLibrary($conn, $userId, $gameId)
-{
+function checkLibrary($conn, $userId, $gameId){
     $query = "SELECT * FROM library WHERE user_id = '$userId' AND game_id = '$gameId'";
     $result = mysqli_query($conn, $query);
     return mysqli_num_rows($result) > 0;
 }
 
-function checkWishlist($conn, $userId, $gameId)
-{
+function checkWishlist($conn, $userId, $gameId){
     $query = "SELECT * FROM wishlist WHERE user_id = '$userId' AND game_id = '$gameId'";
     $result = mysqli_query($conn, $query);
     return mysqli_num_rows($result) > 0;
@@ -23,18 +21,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
 $showLoginButton = !$isLoggedIn;
 
 $games = getGames($conn);
-$gamesPerPage = 4;
-$currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 0;
-$totalPages = ceil(count($games) / $gamesPerPage);
 $backgroundImage = getMusimBG();
 
-if ($currentPage < 0) {
-    $currentPage = $totalPages - 1;
-} elseif ($currentPage >= $totalPages) {
-    $currentPage = 0;
-}
-
-$currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage);
+$featuredGames = array_slice($games, 0, 4);
 ?>
 
 <!DOCTYPE html>
@@ -121,72 +110,92 @@ $currentGames = array_slice($games, $currentPage * $gamesPerPage, $gamesPerPage)
     </script>
 
     <main class="store-content">
-        <div class="game-container" id="game-section">
-            <div class="game-carousel">
-                <?php foreach ($currentGames as $game): ?>
-                    <div class="game-item">
-                        <div class="game-content">
-                            <!-- bila sudah login akan menampilkan ini -->
-                            <?php if ($isLoggedIn): ?>
-                                <form action="GameDetails.php" method="POST" style="width: 100%;">
-                                    <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
-                                    <button type="submit" name="submit_detail" style="display:none;"></button>
-                                    <div onclick="this.closest('form').querySelector('button').click();" style="cursor: pointer;">
-                                        <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
-                                            alt="<?php echo htmlspecialchars($game['game_name']); ?>" class="game-image"
-                                            onerror="this.src='../../../Assets/default-game.jpg'">
-                                    </div>
-                                </form>
-                            <!-- bila belum login (guest) akan terlihat gambar nya saja -->
-                            <?php else: ?>
+        <div class="featured-games">
+            <h2 class="featured-title">Featured Games</h2>
+            <div class="games-grid">
+                <?php foreach ($featuredGames as $game): ?>
+                    <div class="game-card">
+                        <?php if ($isLoggedIn): ?>
+                            <form action="GameDetails.php" method="POST">
+                                <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
+                                <button type="submit" name="submit_detail" style="display:none;"></button>
+                                <div onclick="this.closest('form').querySelector('button').click();" style="cursor: pointer;" class="game-image-container">
+                                    <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
+                                        alt="<?php echo htmlspecialchars($game['game_name']); ?>"
+                                        onerror="this.src='../../../Assets/default-game.jpg'">
+                                </div>
+                            </form>
+                        <?php else: ?>
+                            <div class="game-image-container">
                                 <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
-                                alt="<?php echo htmlspecialchars($game['game_name']); ?>" class="game-image"
-                                onerror="this.src='../../../Assets/default-game.jpg'">
-                            <?php endif; ?>
-
-                            <!-- menampilkan semua dibawah gambar yaitu nama, harga, button wishlist atau Tulisan In Library -->
-                            <div class="game-info">
-                                <h2><?php echo htmlspecialchars($game['game_name']); ?></h2>
-                                <div class="price">Rp <?php echo number_format($game['game_price'], 0, ',', '.'); ?></div>
-                                <?php if ($isLoggedIn): ?>
-                                    <?php if (!checkLibrary($conn, $_SESSION['user_id'], $game['game_id'])): ?>
-                                        <div class="wishlist-overlay">
-                                            <?php if (!checkWishlist($conn, $_SESSION['user_id'], $game['game_id'])): ?>
-                                                <form action="../../../BackEnd/Member/addToWishlist.php" method="POST">
-                                                    <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
-                                                    <button type="submit" name="submit_wishlist" class="wishlist-btn">Add to
-                                                        Wishlist</button>
-                                                </form>
-                                            <?php else: ?>
-                                                <div class="ownedWishlist">Already in wishlist</div>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php else: ?>
-                                        <div class="owned">In Library</div>
-                                    <?php endif; ?>
-                                <?php endif; ?>
+                                    alt="<?php echo htmlspecialchars($game['game_name']); ?>"
+                                    onerror="this.src='../../../Assets/default-game.jpg'">
                             </div>
+                        <?php endif; ?>
+                        <div class="game-info">
+                            <h2><?php echo htmlspecialchars($game['game_name']); ?></h2>
+                            <div class="price">Rp <?php echo number_format($game['game_price'], 0, ',', '.'); ?></div>
+                            <?php if ($isLoggedIn): ?>
+                                <?php if (!checkLibrary($conn, $_SESSION['user_id'], $game['game_id'])): ?>
+                                    <?php if (!checkWishlist($conn, $_SESSION['user_id'], $game['game_id'])): ?>
+                                        <form action="../../../BackEnd/Member/addToWishlist.php" method="POST">
+                                            <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
+                                            <button type="submit" name="submit_wishlist" class="wishlist-btn">Add to Wishlist</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <div class="ownedWishlist">Already in wishlist</div>
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    <div class="owned">In Library</div>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
+        </div>
 
-            <div class="pagination">
-                <?php if ($currentPage > 0): ?>
-                    <a href="?page=<?php echo ($currentPage - 1); ?>" class="page-nav">&laquo; Previous</a>
-                <?php endif; ?>
-
-                <?php for ($i = 0; $i < $totalPages; $i++): ?>
-                    <a href="?page=<?php echo $i; ?>"
-                        class="page-number <?php echo $i === $currentPage ? 'active' : ''; ?>">
-                        <?php echo ($i + 1); ?>
-                    </a>
-                <?php endfor; ?>
-
-                <?php if ($currentPage < $totalPages - 1): ?>
-                    <a href="?page=<?php echo ($currentPage + 1); ?>" class="page-nav">Next &raquo;</a>
-                <?php endif; ?>
-            </div>
+        <h3 class="category-title">All Games</h3>
+        <div class="games-grid">
+            <?php foreach ($games as $game): ?>
+                <div class="game-card">
+                    <?php if ($isLoggedIn): ?>
+                        <form action="GameDetails.php" method="POST">
+                            <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
+                            <button type="submit" name="submit_detail" style="display:none;"></button>
+                            <div onclick="this.closest('form').querySelector('button').click();" style="cursor: pointer;" class="game-image-container">
+                                <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
+                                    alt="<?php echo htmlspecialchars($game['game_name']); ?>"
+                                    onerror="this.src='../../../Assets/default-game.jpg'">
+                            </div>
+                        </form>
+                    <?php else: ?>
+                        <div class="game-image-container">
+                            <img src="../../../Assets/<?php echo htmlspecialchars($game['game_image']); ?>"
+                                alt="<?php echo htmlspecialchars($game['game_name']); ?>"
+                                onerror="this.src='../../../Assets/default-game.jpg'">
+                        </div>
+                    <?php endif; ?>
+                    <div class="game-info">
+                        <h2><?php echo htmlspecialchars($game['game_name']); ?></h2>
+                        <div class="price">Rp <?php echo number_format($game['game_price'], 0, ',', '.'); ?></div>
+                        <?php if ($isLoggedIn): ?>
+                            <?php if (!checkLibrary($conn, $_SESSION['user_id'], $game['game_id'])): ?>
+                                <?php if (!checkWishlist($conn, $_SESSION['user_id'], $game['game_id'])): ?>
+                                    <form action="../../../BackEnd/Member/addToWishlist.php" method="POST">
+                                        <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
+                                        <button type="submit" name="submit_wishlist" class="wishlist-btn">Add to Wishlist</button>
+                                    </form>
+                                <?php else: ?>
+                                    <div class="ownedWishlist">Already in wishlist</div>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <div class="owned">In Library</div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </main>
 
