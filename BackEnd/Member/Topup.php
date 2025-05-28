@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['submit'])) {
     $user_id = $_SESSION['user_id'];
     $amount = intval($_POST['amount']);
     $payment_method = $_POST['payment_method'];
