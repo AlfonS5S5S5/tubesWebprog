@@ -68,7 +68,7 @@ require_once __DIR__ . "/../../../BackEnd/getData.php";
                         </div>
                     </div>
                 </div>
-                <button type="submit" id="purchase-btn" class="purchase-btn">Purchase</button>
+                <button type="submit" id="purchase-btn" class="purchase-btn" name="submit">Purchase</button>
             </form>
         </div>
     </main>
