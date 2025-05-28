@@ -10,13 +10,13 @@
 
 <body>
     <?php
+
+    include_once 'header.php';
+    include("../../../BackEnd/Member/LibraryMember.php");
     if (!isset($_SESSION['user_id'])) {
         header("Location: ../../../FrontEnd/html/Member/Login.html");
         exit();
     }
-    include_once 'header.php';
-    include("../../../BackEnd/Member/LibraryMember.php");
-
     showLibrary();
     include_once 'footer.html';
     ?>
