@@ -19,7 +19,7 @@ while ($row = mysqli_fetch_array($result)) {
         $blockStatus = $row['user_block_status'];
         $found = true;
         break;
-
+        
     }
 }
 
