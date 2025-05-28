@@ -57,10 +57,8 @@
                 echo "<div class='game-actions'>";
                 if (isset($_SESSION['user_id'])) {
                     if (getPurchasedStatus($conn, $gameID, $_SESSION['user_id'])) {
-                        echo "<form method='post'>";
-                        echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
                         echo "<button type='submit' class='purchase-buy-button'>Play Game</button>";
-                        echo "</form>";
+              
                     } else {
                         echo "<form method='post' action='../../../FrontEnd/html/Game/BuyGames.php'>";
                         echo "<input type='hidden' name='game_id' value='" . htmlspecialchars($gameID) . "'>";
