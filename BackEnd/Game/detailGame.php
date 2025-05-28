@@ -29,7 +29,7 @@
         $result = mysqli_query($conn, $query);
         $found = false;
 
-        $picture_path = isset($_POST['submit_detail']) ? "../../../Assets/" : "../../../Assets/";
+        $picture_path = "../../../Assets/";
 
         while ($row = mysqli_fetch_assoc($result)) {
             if ($row['game_id'] == $gameID) {
@@ -54,7 +54,6 @@
                 echo "<p>Game Type: " . htmlspecialchars($row['game_type']) . "</p>";
                 echo "<p>Price: Rp " . number_format($row['game_price'], 0, ',', '.') . "</p>";
 
-                // Purchase/Play status
                 echo "<div class='game-actions'>";
                 if (isset($_SESSION['user_id'])) {
                     if (getPurchasedStatus($conn, $gameID, $_SESSION['user_id'])) {

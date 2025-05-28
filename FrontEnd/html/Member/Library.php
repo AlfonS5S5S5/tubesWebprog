@@ -10,21 +10,15 @@
 
 <body>
     <?php
-    include_once 'header.php';
-
     if (!isset($_SESSION['user_id'])) {
         header("Location: ../../../FrontEnd/html/Member/Login.html");
         exit();
     }
+    include_once 'header.php';
+    include("../../../BackEnd/Member/LibraryMember.php");
 
-        
-    ?>
-    <?php include("../../../BackEnd/Member/LibraryMember.php");
-
-    showLibrary(); ?>
-
-    <?php
-        include_once 'footer.html';
+    showLibrary();
+    include_once 'footer.html';
     ?>
 </body>
 
