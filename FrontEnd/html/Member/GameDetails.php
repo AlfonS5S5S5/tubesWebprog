@@ -18,14 +18,14 @@
             header("Location: ../../../FrontEnd/html/Member/Login.html");
             exit();
         }
-        
         include_once __DIR__ . "/../../../BackEnd/connection.php";
-        include_once __DIR__ . "/../../../BackEnd/Game/detailGame.php";
-        
+        include(__DIR__ . "/../../../BackEnd/Game/detailGame.php");
+
         if (isset($_POST['game_id'])) {
 
             $gameId = $_POST['game_id'];
-        
+            showDetailGame($gameId,false);
+
             include __DIR__ . "/comment.php";
         } else {
             echo "<p>Error: Game ID tidak ada.</p>";

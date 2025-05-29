@@ -37,7 +37,7 @@
                 }
             }
             echo "<form method='POST' action=''>";
-            echo "<label for='genre'>Sort by Genre: </label>";
+            echo "<label for='genre'>Filter by Genre: </label>";
             echo "<select name ='sortBy' id='genre' onchange='this.form.submit()'>";
             $selectedGenre = isset($_POST['sortBy']) ? $_POST['sortBy'] : 'All';
 
@@ -57,7 +57,6 @@
                 }
             }
         } else {
-            //direct ke buy game
             echo "<p>No games found in your library. </p>";
         }
     }

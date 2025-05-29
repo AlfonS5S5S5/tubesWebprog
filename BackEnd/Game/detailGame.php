@@ -18,7 +18,6 @@
     if (isset($_POST['submit_detail'])) {
         $gameID = $_POST['game_id'];
         $Wishlist = false;
-        showDetailGame($gameID, $Wishlist);
     }
 
     function showDetailGame($gameID, $Wishlist)
@@ -108,7 +107,7 @@
     function getGameComment($gameID)
     {
         global $conn;
-        $query = "SELECT * FROM review WHERE game_id = '" . $gameID . "'";
+        $query = "SELECT * FROM review as r INNER JOIN users as u ON r.user_id = u.user_id WHERE r.game_id = $gameID AND u.user_block_status = 'UNBLOCKED' ";
         $result = mysqli_query($conn, $query);
         $comments = [];
 
@@ -132,9 +131,10 @@
                 $query = "SELECT user_name FROM users WHERE user_id = '" . $comment['user_id'] . "'";
                 $result = mysqli_query($conn, $query);
                 $user = mysqli_fetch_assoc($result);
-                $queryUserLogin = "SELECT user_id FROM users WHERE user_id = '" . $_SESSION['user_id'] . "'";
-                $resultUserLogin = mysqli_query($conn, $queryUserLogin);
-                $userLogin = mysqli_fetch_assoc($resultUserLogin);
+
+                // $queryUserLogin = "SELECT user_id FROM users WHERE user_id = '" . $_SESSION['user_id'] . "'";
+                // $resultUserLogin = mysqli_query($conn, $queryUserLogin);
+                // $userLogin = mysqli_fetch_assoc($resultUserLogin);
 
                 echo "<tr>";
                 echo "<td>";

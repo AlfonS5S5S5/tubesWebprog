@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <div class="admin-container">
         <h1>Admin Dashboard</h1>
-        
+        <a href="ConvertToXML.php" class="admin-option">User XML</a>    
         <a href="addGame.php" class="admin-option">Add New Game</a>
         <a href="deleteGame.php" class="admin-option">Delete Game</a>
         <a href="updateGamePrice.php" class="admin-option">Update Game Price</a>
