@@ -19,8 +19,8 @@ if (!isset($_SESSION['user_id'])) {
         <a href="addGame.php" class="admin-option">Add New Game</a>
         <a href="deleteGame.php" class="admin-option">Delete Game</a>
         <a href="updateGamePrice.php" class="admin-option">Update Game Price</a>
-        <a href="blockUser.php" class="admin-option">Manage Blocked User</a>
-        <a href="changeUserRole.php" class="admin-option">Change User Roles</a>
+        <a href="blockUser.php" class="admin-option">Manage Blocked Users</a>
+        <a href="changeUserRole.php" class="admin-option">Change User Role</a>
         <a href="dashboard.php" class="admin-option">View Dashboard</a>
         <a href="../../../BackEnd/logout.php" style="color: red; text-decoration: none; display: block; text-align: center; margin-top: 20px;">Logout</a>
     </div>
