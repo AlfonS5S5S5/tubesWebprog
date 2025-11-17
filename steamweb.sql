@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2025 at 03:49 PM
+-- Generation Time: Nov 17, 2025 at 10:46 AM
 -- Server version: 11.1.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,10 @@ CREATE TABLE `block` (
 --
 
 INSERT INTO `block` (`block_id`, `user_id`, `block_reason`, `block_status`) VALUES
-(2, 1, 'Racist', 'ACCEPTED');
+(1, 3, 'Bad Violance', 'ACCEPTED'),
+(2, 1, 'Racist', 'PENDING'),
+(3, 3, 'Hate speech', 'PENDING'),
+(4, 3, 'Death threats', 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -67,7 +70,7 @@ INSERT INTO `game` (`game_id`, `game_name`, `game_genre`, `game_developer`, `gam
 (1, 'Apex Legends', 'Shooter', 'EA', '2023-11-20', 60000, 'Windows 10', 'Multiplayer', 'apex.jpg'),
 (2, 'Counter Strike', 'Shooter', 'Valve', '2022-07-15', 30000, 'Windows 11', 'Multiplayer', 'cs.png'),
 (3, 'F1 24', 'Racing', 'EA', '2024-01-05', 15000, 'Windows 11', 'Singleplayer', 'f1.jpeg'),
-(4, 'Dota 2', 'MOBA', 'Valve', '2013-07-09', 20000, 'Windows 10', 'Multiplayer', 'dota2.jpg'),
+(4, 'Dota 2', 'MOBA', 'Valve', '2013-07-09', 0, 'Windows 10', 'Multiplayer', 'dota2.jpg'),
 (5, 'Cyberpunk 2077', 'RPG', 'CD Projekt', '2020-12-10', 75000, 'Windows 10', 'Singleplayer', 'cyberpunk2077.jpg'),
 (6, 'Baldur\'s Gate 3', 'RPG', 'Larian Studios', '2023-08-03', 89000, 'Windows 10', 'Singleplayer', 'bg3.jpg'),
 (7, 'Stardew Valley', 'Simulation', 'ConcernedApe', '2016-02-26', 12000, 'Windows 10', 'Singleplayer', 'stardew.jpg'),
@@ -105,18 +108,57 @@ INSERT INTO `library` (`user_id`, `game_id`, `library_status`, `library_buy_game
 (3, 2, 'INSTALLED', 30000),
 (3, 5, 'NOT INSTALLED', 75000),
 (3, 9, 'INSTALLED', 10000),
-(5, 1, 'NOT INSTALLED', 60000),
 (5, 2, 'NOT INSTALLED', 30000),
 (5, 3, 'NOT INSTALLED', 15000),
-(5, 4, 'NOT INSTALLED', 0),
-(5, 6, 'NOT INSTALLED', 89000),
 (5, 7, 'INSTALLED', 89000),
 (5, 12, 'INSTALLED', 65000),
-(6, 1, 'NOT INSTALLED', 60000),
-(6, 2, 'NOT INSTALLED', 30000),
-(6, 3, 'NOT INSTALLED', 15000),
-(6, 4, 'NOT INSTALLED', 0),
-(6, 8, 'NOT INSTALLED', 60000);
+(16, 1, 'NOT INSTALLED', 60000),
+(16, 2, 'NOT INSTALLED', 30000),
+(16, 3, 'NOT INSTALLED', 15000),
+(16, 4, 'NOT INSTALLED', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pendapatan_admin`
+--
+
+CREATE TABLE `pendapatan_admin` (
+  `pendapatan_id` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jumlah` decimal(15,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pendapatan_admin`
+--
+
+INSERT INTO `pendapatan_admin` (`pendapatan_id`, `tanggal`, `jumlah`) VALUES
+(1, '2025-01-08', 750000.00),
+(2, '2025-01-25', 550000.00),
+(3, '2025-02-15', 680000.00),
+(4, '2025-02-28', 720000.00),
+(5, '2025-03-05', 950000.00),
+(6, '2025-03-20', 640000.00),
+(7, '2025-03-31', 210000.00),
+(8, '2025-04-10', 880000.00),
+(9, '2025-04-26', 700000.00),
+(10, '2025-05-12', 1050000.00),
+(11, '2025-05-27', 910000.00),
+(12, '2025-06-03', 1200000.00),
+(13, '2025-06-18', 850000.00),
+(14, '2025-07-11', 1350000.00),
+(15, '2025-07-29', 990000.00),
+(16, '2025-08-01', 1150000.00),
+(17, '2025-08-23', 890000.00),
+(18, '2025-09-09', 1220000.00),
+(19, '2025-09-25', 960000.00),
+(20, '2025-09-30', 300000.00),
+(21, '2025-10-04', 1450000.00),
+(22, '2025-10-19', 1100000.00),
+(23, '2025-11-06', 1300000.00),
+(24, '2025-11-20', 1050000.00),
+(26, '2025-11-17', 6000.00);
 
 -- --------------------------------------------------------
 
@@ -142,7 +184,11 @@ INSERT INTO `review` (`review_id`, `user_id`, `game_id`, `review_text`) VALUES
 (4, 3, 9, 'Fun and creative, great to play with friends.'),
 (5, 5, 6, 'One of the best RPGs I\'ve ever played.'),
 (6, 5, 12, 'Great pirate adventure with amazing co-op gameplay.'),
-(9, 3, 2, 'game nya jelek');
+(16, 5, 2, 'hohoho'),
+(17, 5, 2, 'wowow'),
+(18, 5, 2, 'wowow'),
+(19, 5, 2, 'woww'),
+(20, 5, 2, 'woww');
 
 -- --------------------------------------------------------
 
@@ -187,12 +233,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_wallet`, `user_block_status`, `user_profile_picture`, `user_role`) VALUES
-(1, 'member1', '32250170a0dca92d53ec9624f336ca24', 50000, 'UNBLOCKED', NULL, 'MEMBER'),
+(1, 'member1', '32250170a0dca92d53ec9624f336ca24', 50000, 'UNBLOCKED', NULL, 'CREATOR'),
 (2, 'admin1', '25e4ee4e9229397b6b17776bfceaf8e7', NULL, 'UNBLOCKED', NULL, 'ADMIN'),
-(3, 'member2', '73a054cc528f91ca1bbdda3589b6a22d', 20000, 'BLOCKED', 'Images/userProfile/Alfons.jpg', 'MEMBER'),
+(3, 'member2', '73a054cc528f91ca1bbdda3589b6a22d', 20000, 'BLOCKED', NULL, 'MEMBER'),
 (4, 'admin2', '8b478e5c89442c1e054b49e2c3814e9e', 0, 'UNBLOCKED', NULL, 'ADMIN'),
-(5, 'alfonsGaming', 'da26f30d97cd676a721b33cde6c3e1ce', 1327270, 'UNBLOCKED', 'Images/userProfile/â€”Pngtreeâ€”the black hole in space_448838.png', 'MEMBER'),
-(6, 'alfons', '8b6bc5d8046c8466359d3ac43ce362ab', 25000, 'UNBLOCKED', NULL, 'MEMBER');
+(5, 'alfonsGaming', 'da26f30d97cd676a721b33cde6c3e1ce', 120000, 'UNBLOCKED', 'alfons.jpg', 'MEMBER'),
+(7, 'cihuy', '910aeebd7c7d56cf31105f090863aa17', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(8, 'lalale', '6bc3c8ad6ee1c080f7d93696abaad429', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(9, 'halo', 'ea7d3eb14d8ff4de44f68b1656cceeac', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(10, 'hehe', 'f3c2cefc1f3b082a56f52902484ca511', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(11, 'abcd', '6e7906b7fb3f8e1c6366c0910050e595', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(12, 'mario', '490eb03d394fd69c1eb0a116983cf3f4', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(15, 'adminbaru', '70e76a15da00e6301ade718cc9416f79', 0, 'UNBLOCKED', NULL, 'ADMIN'),
+(16, 'userbarubaru', '5ef035d11d74713fcb36f2df26aa7c3d', 261700, 'UNBLOCKED', NULL, 'MEMBER'),
+(17, 'luis', '827ccb0eea8a706c4c34a16891f84e7b', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(18, 'adminbaru1', '827ccb0eea8a706c4c34a16891f84e7b', 0, 'UNBLOCKED', NULL, 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -218,12 +273,12 @@ INSERT INTO `wishlist` (`user_id`, `game_id`, `wishlist_date_added`) VALUES
 (1, 13, '2025-04-14'),
 (3, 4, '2025-04-11'),
 (3, 7, '2025-04-12'),
-(5, 5, '2025-04-11'),
-(5, 8, '2025-05-27'),
+(5, 1, '2025-04-10'),
+(5, 4, '2025-05-27'),
+(5, 5, '2025-05-28'),
 (5, 10, '2025-04-13'),
 (5, 15, '2025-04-14'),
-(6, 2, '2025-05-18'),
-(6, 6, '2025-05-18');
+(16, 7, '2025-11-17');
 
 --
 -- Indexes for dumped tables
@@ -248,6 +303,12 @@ ALTER TABLE `game`
 ALTER TABLE `library`
   ADD PRIMARY KEY (`user_id`,`game_id`),
   ADD KEY `game_id` (`game_id`);
+
+--
+-- Indexes for table `pendapatan_admin`
+--
+ALTER TABLE `pendapatan_admin`
+  ADD PRIMARY KEY (`pendapatan_id`);
 
 --
 -- Indexes for table `review`
@@ -285,19 +346,25 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `block`
 --
 ALTER TABLE `block`
-  MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `pendapatan_admin`
+--
+ALTER TABLE `pendapatan_admin`
+  MODIFY `pendapatan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `topup`
@@ -309,7 +376,7 @@ ALTER TABLE `topup`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
