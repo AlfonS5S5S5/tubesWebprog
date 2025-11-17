@@ -9,19 +9,15 @@ if (!isset($_SESSION['user_id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+    <title>Creator Dashboard</title>
     <link rel="stylesheet" type="text/css" href="../../css/admin.css">
 </head>
 <body>
     <div class="admin-container">
-        <h1>Admin Dashboard</h1>
-        <a href="members.xml" class="admin-option">User XML</a>
+        <h1>Creator Dashboard</h1>
         <a href="addGame.php" class="admin-option">Add New Game</a>
         <a href="deleteGame.php" class="admin-option">Delete Game</a>
-        <a href="updateGamePrice.php" class="admin-option">Update Game Price</a>
-        <a href="blockUser.php" class="admin-option">Manage Blocked User</a>
-        <a href="changeUserRole.php" class="admin-option">Change User Role</a>
-        
+        <a href="dashboard.php" class="admin-option">View Dashboard</a>
         <a href="../../../BackEnd/logout.php" style="color: red; text-decoration: none; display: block; text-align: center; margin-top: 20px;">Logout</a>
     </div>
     

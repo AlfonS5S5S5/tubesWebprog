@@ -1,0 +1,149 @@
+/* Warna Steam-like:
+   Latar Belakang: #1b2838 (Dark Navy/Blue)
+   Aksen/Primary: #66c0f4 (Light Blue/Cyan)
+   Teks Umum: #c7d5e0 (Off-White/Light Gray)
+*/
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1b2838; /* Latar belakang gelap ala Steam */
+    color: #c7d5e0; /* Teks default */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.dashboard-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #2a475e; /* Header sedikit lebih terang dari background */
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Bayangan gelap */
+}
+
+.header h1 {
+    color: #ffffff; /* Judul utama putih */
+    margin-bottom: 5px;
+    font-weight: 300; 
+}
+
+.header p {
+    color: #66c0f4; /* Aksen warna biru muda */
+    font-size: 1.1em;
+}
+
+/* Card untuk Total Pendapatan */
+.summary-card {
+    background: linear-gradient(135deg, #10344d, #2a475e); /* Gradien gelap */
+    color: white;
+    padding: 25px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 30px;
+    border-left: 5px solid #66c0f4; /* Aksen batas kiri warna Steam Blue */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px); /* Efek hover kecil */
+}
+
+.summary-card h2 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: #c7d5e0;
+    text-transform: uppercase;
+}
+
+.revenue-amount {
+    font-size: 2.8em;
+    font-weight: bold;
+    color: #a4e4d7; /* Warna hijau muda/cyan untuk penekanan angka */
+    margin: 10px 0 0 0;
+}
+
+/* Container untuk Grafik */
+.chart-container {
+    background-color: #2a475e; /* Latar belakang chart yang lebih menonjol */
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.chart-container h2 {
+    color: #c7d5e0;
+    border-bottom: 1px solid #1b2838; 
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+/* Penyesuaian Canvas untuk latar belakang gelap */
+#revenueChart {
+    background-color: #2a475e; 
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* --- Styling untuk Filter Pilihan Bulan/Tahun (UPDATE) --- */
+.filter-card {
+    background-color: #2a475e;
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border-left: 3px solid #10344d; 
+}
+
+.filter-card form label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #c7d5e0;
+}
+
+.filter-card select {
+    padding: 8px 12px;
+    margin-right: 20px;
+    border-radius: 4px;
+    border: 1px solid #1b2838;
+    background-color: #1b2838;
+    color: #ffffff; 
+    font-size: 1em;
+    cursor: pointer;
+    appearance: none; 
+    /* Custom panah SVG di select */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2366c0f4" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.012 2.345 4 3.204 4h9.592c.859 0 1.319 1.012.753 1.658l-4.796 5.482c-.179.205-.55.205-.728 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 30px;
+    transition: all 0.2s ease-in-out; /* Tambahkan transisi untuk efek smooth */
+}
+
+/* Efek Hover dan Focus yang Lebih Menarik */
+.filter-card select:hover {
+    border-color: #66c0f4; /* Border berubah warna saat hover */
+    box-shadow: 0 0 5px rgba(102, 192, 244, 0.5); /* Bayangan biru muda */
+}
+
+.filter-card select:focus {
+    outline: none;
+    border-color: #a4e4d7; /* Border warna hijau/cyan saat focus */
+    box-shadow: 0 0 0 2px rgba(164, 228, 215, 0.3); /* Bayangan luar yang lebih jelas */
+    background-color: #10344d; /* Latar belakang sedikit lebih gelap saat fokus */
+}
+
+/* Styling untuk opsi di dropdown (berlaku di beberapa browser) */
+.filter-card select option {
+    background-color: #1b2838;
+    color: #c7d5e0;
+}
