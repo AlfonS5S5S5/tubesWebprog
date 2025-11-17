@@ -1,0 +1,455 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Nov 17, 2025 at 11:26 AM
+-- Server version: 11.1.2-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `steamweb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `block`
+--
+
+CREATE TABLE `block` (
+  `block_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `block_reason` varchar(30) NOT NULL,
+  `block_status` varchar(20) NOT NULL DEFAULT 'PENDING'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `block`
+--
+
+INSERT INTO `block` (`block_id`, `user_id`, `block_reason`, `block_status`) VALUES
+(1, 3, 'Bad Violance', 'ACCEPTED'),
+(2, 1, 'Racist', 'PENDING'),
+(3, 3, 'Hate speech', 'PENDING'),
+(4, 3, 'Death threats', 'PENDING');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `creator`
+--
+
+CREATE TABLE `creator` (
+  `creator_id` int(11) NOT NULL,
+  `creator_name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `pendapatan_creator` double DEFAULT NULL,
+  `roles` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `creator`
+--
+
+INSERT INTO `creator` (`creator_id`, `creator_name`, `email`, `created_at`, `pendapatan_creator`, `roles`) VALUES
+(1, 'Electronic Arts', 'electronicArts@gmail.com', '2025-11-17 17:07:54', 0, 'CREATOR');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `game`
+--
+
+CREATE TABLE `game` (
+  `game_id` int(11) NOT NULL,
+  `game_name` varchar(30) NOT NULL,
+  `game_genre` varchar(30) NOT NULL,
+  `game_developer` varchar(20) NOT NULL,
+  `game_release_date` date NOT NULL,
+  `game_price` int(11) NOT NULL,
+  `game_supported_os` varchar(10) NOT NULL,
+  `game_type` varchar(20) NOT NULL,
+  `game_picture` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `game`
+--
+
+INSERT INTO `game` (`game_id`, `game_name`, `game_genre`, `game_developer`, `game_release_date`, `game_price`, `game_supported_os`, `game_type`, `game_picture`) VALUES
+(1, 'Apex Legends', 'Shooter', 'EA', '2023-11-20', 60000, 'Windows 10', 'Multiplayer', 'apex.jpg'),
+(2, 'Counter Strike', 'Shooter', 'Valve', '2022-07-15', 30000, 'Windows 11', 'Multiplayer', 'cs.png'),
+(3, 'F1 24', 'Racing', 'EA', '2024-01-05', 15000, 'Windows 11', 'Singleplayer', 'f1.jpeg'),
+(4, 'Dota 2', 'MOBA', 'Valve', '2013-07-09', 0, 'Windows 10', 'Multiplayer', 'dota2.jpg'),
+(5, 'Cyberpunk 2077', 'RPG', 'CD Projekt', '2020-12-10', 75000, 'Windows 10', 'Singleplayer', 'cyberpunk2077.jpg'),
+(6, 'Baldur\'s Gate 3', 'RPG', 'Larian Studios', '2023-08-03', 89000, 'Windows 10', 'Singleplayer', 'bg3.jpg'),
+(7, 'Stardew Valley', 'Simulation', 'ConcernedApe', '2016-02-26', 12000, 'Windows 10', 'Singleplayer', 'stardew.jpg'),
+(8, 'The Witcher 3', 'RPG', 'CD Projekt', '2015-05-18', 60000, 'Windows 10', 'Singleplayer', 'witcher3.jpg'),
+(9, 'Terraria', 'Adventure', 'Re-Logic', '2011-05-16', 10000, 'Windows 10', 'Multiplayer', 'terraria.jpg'),
+(10, 'Elden Ring', 'Action', 'FromSoftware', '2022-02-25', 75000, 'Windows 11', 'Singleplayer', 'eldenring.jpg'),
+(11, 'Left 4 Dead 2', 'Shooter', 'Valve', '2009-11-17', 20000, 'Windows 10', 'Multiplayer', 'l4d2.jpg'),
+(12, 'Sea of Thieves', 'Adventure', 'Rare', '2018-03-20', 65000, 'Windows 10', 'Multiplayer', 'seaofthieves.jpg'),
+(13, 'Hades', 'Roguelike', 'Supergiant Games', '2020-09-17', 25000, 'Windows 10', 'Singleplayer', 'hades.jpg'),
+(14, 'Phasmophobia', 'Horror', 'Kinetic Games', '2020-09-18', 40000, 'Windows 10', 'Multiplayer', 'phasmophobia.jpg'),
+(15, 'It Takes Two', 'Adventure', 'Hazelight Studios', '2021-03-26', 55000, 'Windows 11', 'Multiplayer', 'ittakestwo.jpg'),
+(16, 'Among Us', 'Party', 'Innersloth', '2018-11-16', 10000, 'Windows 10', 'Multiplayer', 'amongus.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `library`
+--
+
+CREATE TABLE `library` (
+  `user_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `library_status` varchar(20) DEFAULT 'NOT INSTALLED',
+  `library_buy_game_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `library`
+--
+
+INSERT INTO `library` (`user_id`, `game_id`, `library_status`, `library_buy_game_price`) VALUES
+(1, 1, 'INSTALLED', 60000),
+(1, 4, 'INSTALLED', 0),
+(1, 7, 'NOT INSTALLED', 12000),
+(3, 2, 'INSTALLED', 30000),
+(3, 5, 'NOT INSTALLED', 75000),
+(3, 9, 'INSTALLED', 10000),
+(5, 2, 'NOT INSTALLED', 30000),
+(5, 3, 'NOT INSTALLED', 15000),
+(5, 7, 'INSTALLED', 89000),
+(5, 12, 'INSTALLED', 65000),
+(16, 1, 'NOT INSTALLED', 60000),
+(16, 2, 'NOT INSTALLED', 30000),
+(16, 3, 'NOT INSTALLED', 15000),
+(16, 4, 'NOT INSTALLED', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pendapatan_admin`
+--
+
+CREATE TABLE `pendapatan_admin` (
+  `pendapatan_id` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jumlah` decimal(15,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pendapatan_admin`
+--
+
+INSERT INTO `pendapatan_admin` (`pendapatan_id`, `tanggal`, `jumlah`) VALUES
+(1, '2025-01-08', 750000.00),
+(2, '2025-01-25', 550000.00),
+(3, '2025-02-15', 680000.00),
+(4, '2025-02-28', 720000.00),
+(5, '2025-03-05', 950000.00),
+(6, '2025-03-20', 640000.00),
+(7, '2025-03-31', 210000.00),
+(8, '2025-04-10', 880000.00),
+(9, '2025-04-26', 700000.00),
+(10, '2025-05-12', 1050000.00),
+(11, '2025-05-27', 910000.00),
+(12, '2025-06-03', 1200000.00),
+(13, '2025-06-18', 850000.00),
+(14, '2025-07-11', 1350000.00),
+(15, '2025-07-29', 990000.00),
+(16, '2025-08-01', 1150000.00),
+(17, '2025-08-23', 890000.00),
+(18, '2025-09-09', 1220000.00),
+(19, '2025-09-25', 960000.00),
+(20, '2025-09-30', 300000.00),
+(21, '2025-10-04', 1450000.00),
+(22, '2025-10-19', 1100000.00),
+(23, '2025-11-06', 1300000.00),
+(24, '2025-11-20', 1050000.00),
+(26, '2025-11-17', 6000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `review_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `review_text` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`review_id`, `user_id`, `game_id`, `review_text`) VALUES
+(1, 1, 1, 'Ugly game, not recommended, black man developer'),
+(2, 1, 4, 'Classic MOBA, never gets old.'),
+(3, 3, 2, 'Best tactical shooter out there.'),
+(4, 3, 9, 'Fun and creative, great to play with friends.'),
+(5, 5, 6, 'One of the best RPGs I\'ve ever played.'),
+(6, 5, 12, 'Great pirate adventure with amazing co-op gameplay.'),
+(16, 5, 2, 'hohoho'),
+(17, 5, 2, 'wowow'),
+(18, 5, 2, 'wowow'),
+(19, 5, 2, 'woww'),
+(20, 5, 2, 'woww');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `topup`
+--
+
+CREATE TABLE `topup` (
+  `topup_id` int(11) NOT NULL,
+  `topup_date` date NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `topup_quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `topup`
+--
+
+INSERT INTO `topup` (`topup_id`, `topup_date`, `user_id`, `topup_quantity`) VALUES
+(1, '2024-04-01', 1, 50000),
+(2, '2024-04-02', 3, 20000),
+(3, '2024-04-03', 5, 150000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(20) NOT NULL,
+  `user_password` varchar(255) NOT NULL,
+  `user_wallet` int(10) DEFAULT 0,
+  `user_block_status` varchar(10) NOT NULL DEFAULT 'UNBLOCKED',
+  `user_profile_picture` varchar(200) DEFAULT NULL,
+  `user_role` varchar(30) NOT NULL DEFAULT 'MEMBER'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_wallet`, `user_block_status`, `user_profile_picture`, `user_role`) VALUES
+(1, 'member1', '32250170a0dca92d53ec9624f336ca24', 50000, 'UNBLOCKED', NULL, 'CREATOR'),
+(2, 'admin1', '25e4ee4e9229397b6b17776bfceaf8e7', NULL, 'UNBLOCKED', NULL, 'ADMIN'),
+(3, 'member2', '73a054cc528f91ca1bbdda3589b6a22d', 20000, 'BLOCKED', NULL, 'MEMBER'),
+(4, 'admin2', '8b478e5c89442c1e054b49e2c3814e9e', 0, 'UNBLOCKED', NULL, 'ADMIN'),
+(5, 'alfonsGaming', 'da26f30d97cd676a721b33cde6c3e1ce', 120000, 'UNBLOCKED', 'alfons.jpg', 'MEMBER'),
+(7, 'cihuy', '910aeebd7c7d56cf31105f090863aa17', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(8, 'lalale', '6bc3c8ad6ee1c080f7d93696abaad429', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(9, 'halo', 'ea7d3eb14d8ff4de44f68b1656cceeac', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(10, 'hehe', 'f3c2cefc1f3b082a56f52902484ca511', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(11, 'abcd', '6e7906b7fb3f8e1c6366c0910050e595', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(12, 'mario', '490eb03d394fd69c1eb0a116983cf3f4', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(15, 'adminbaru', '70e76a15da00e6301ade718cc9416f79', 0, 'UNBLOCKED', NULL, 'ADMIN'),
+(16, 'userbarubaru', '5ef035d11d74713fcb36f2df26aa7c3d', 261700, 'UNBLOCKED', NULL, 'MEMBER'),
+(17, 'luis', '827ccb0eea8a706c4c34a16891f84e7b', 0, 'UNBLOCKED', NULL, 'MEMBER'),
+(18, 'adminbaru1', '827ccb0eea8a706c4c34a16891f84e7b', 0, 'UNBLOCKED', NULL, 'ADMIN');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `user_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `wishlist_date_added` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`user_id`, `game_id`, `wishlist_date_added`) VALUES
+(1, 2, '2025-04-10'),
+(1, 5, '2025-04-11'),
+(1, 8, '2025-04-12'),
+(1, 10, '2025-04-13'),
+(1, 13, '2025-04-14'),
+(3, 4, '2025-04-11'),
+(3, 7, '2025-04-12'),
+(5, 1, '2025-04-10'),
+(5, 4, '2025-05-27'),
+(5, 5, '2025-05-28'),
+(5, 10, '2025-04-13'),
+(5, 15, '2025-04-14'),
+(16, 7, '2025-11-17');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `block`
+--
+ALTER TABLE `block`
+  ADD PRIMARY KEY (`block_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `creator`
+--
+ALTER TABLE `creator`
+  ADD PRIMARY KEY (`creator_id`);
+
+--
+-- Indexes for table `game`
+--
+ALTER TABLE `game`
+  ADD PRIMARY KEY (`game_id`);
+
+--
+-- Indexes for table `library`
+--
+ALTER TABLE `library`
+  ADD PRIMARY KEY (`user_id`,`game_id`),
+  ADD KEY `game_id` (`game_id`);
+
+--
+-- Indexes for table `pendapatan_admin`
+--
+ALTER TABLE `pendapatan_admin`
+  ADD PRIMARY KEY (`pendapatan_id`);
+
+--
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `game_id` (`game_id`);
+
+--
+-- Indexes for table `topup`
+--
+ALTER TABLE `topup`
+  ADD PRIMARY KEY (`topup_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`user_id`,`game_id`),
+  ADD KEY `game_id` (`game_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `block`
+--
+ALTER TABLE `block`
+  MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `creator`
+--
+ALTER TABLE `creator`
+  MODIFY `creator_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `game`
+--
+ALTER TABLE `game`
+  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `pendapatan_admin`
+--
+ALTER TABLE `pendapatan_admin`
+  MODIFY `pendapatan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `topup`
+--
+ALTER TABLE `topup`
+  MODIFY `topup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `block`
+--
+ALTER TABLE `block`
+  ADD CONSTRAINT `block_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `library`
+--
+ALTER TABLE `library`
+  ADD CONSTRAINT `library_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `library_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `review`
+--
+ALTER TABLE `review`
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `topup`
+--
+ALTER TABLE `topup`
+  ADD CONSTRAINT `topup_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
