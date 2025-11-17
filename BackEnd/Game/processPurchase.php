@@ -32,12 +32,16 @@ if ($currentBalance < $game['game_price']) {
     exit();
 }
 
-$afterPurchase = $currentBalance - $game['game_price'];
+$afterPurchase = $currentBalance - ($game['game_price'] + 0.10 * $game['game_price']);
 $updateBalance = "UPDATE users SET user_wallet = $afterPurchase WHERE user_id = $userId";
 $addtoLibrary = "INSERT INTO library (user_id, game_id, library_buy_game_price) VALUES ('$userId', '$gameId', $game[game_price])";
 $deleteWishlist = "DELETE FROM wishlist WHERE user_id = '$userId' AND game_id = '$gameId'";
 $selectWishlist = "SELECT * FROM wishlist WHERE user_id = '$userId' AND game_id = '$gameId'";
 
+if ($game['game_price'] > 0) {
+    $insertDashboard = "INSERT INTO pendapatan_admin (tanggal, jumlah) VALUES (NOW(), " . (0.10 * $game['game_price']) . ")";
+    mysqli_query($conn, $insertDashboard);
+}
 
 if (mysqli_query($conn, $updateBalance) && mysqli_query($conn, $addtoLibrary)) {
     echo "<script>alert('Purchase successful!'); window.location.href = '../../FrontEnd/html/Member/Library.php';</script>";
@@ -45,5 +49,5 @@ if (mysqli_query($conn, $updateBalance) && mysqli_query($conn, $addtoLibrary)) {
     if (mysqli_num_rows(mysqli_query($conn, $selectWishlist)) > 0) {
         mysqli_query($conn, $deleteWishlist);
     }
-   exit();
+    exit();
 }
