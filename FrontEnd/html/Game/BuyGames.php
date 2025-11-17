@@ -55,11 +55,11 @@
                     <h2>Purchase Summary</h2>
                     <div class="price-line">
                         <span>Price:</span>
-                        <span>Rp <?php echo number_format($game['game_price'], 0, ',', '.'); ?></span>
+                        <span>Rp <?php echo number_format($game['game_price'], 0, ',', '.'); echo"<br>admin fee : " . number_format(0.10 * $game['game_price'], 0, ',', '.'); ?></span>
                     </div>
                     <div class="price-line total">
                         <span>Total:</span>
-                        <span>Rp <?php echo number_format($game['game_price'], 0, ',', '.'); ?></span>
+                        <span>Rp <?php echo number_format($game['game_price'] + 0.10 * $game['game_price'], 0, ',', '.'); ?></span>
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@
                     </div>
 
                     <button type="submit" name="submit_purchase" class="purchase-button">
-                        Purchase for Rp <?php echo number_format($game['game_price'], 0, ',', '.'); ?>
+                        Purchase for Rp  <?php echo number_format($game['game_price'] + 0.10 * $game['game_price'], 0, ',', '.'); ?>
                     </button>
                 </form>
             </div>
